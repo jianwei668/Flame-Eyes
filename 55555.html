@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火眼金睛 Flame-Eyes | 101-136全功能整合版</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei",sans-serif;}
+        body{background:#111;color:#eee;padding:20px;}
+        .container{max-width:1400px;margin:0 auto;}
+        .header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #ff6600;padding:15px 0;margin-bottom:20px;}
+        .logo{font-size:28px;font-weight:bold;color:#ff6600;position:relative;}
+        .watermark{position:absolute;top:5px;right:10px;color:rgba(255,102,0,0.7);font-size:14px;pointer-events:none;}
+        .nav-bar{display:flex;gap:15px;margin:10px 0;flex-wrap:wrap;}
+        .nav-item{padding:8px 15px;background:#222;border-radius:5px;cursor:pointer;transition:0.3s;}
+        .nav-item.active{background:#ff6600;color:#000;}
+        .section{background:#222;padding:20px;border-radius:8px;margin:15px 0;}
+        .title{font-size:20px;color:#ff6600;margin-bottom:15px;border-left:4px solid #ff6600;padding-left:10px;}
+        .btn{padding:8px 18px;background:#ff6600;border:none;border-radius:4px;color:#000;font-weight:bold;cursor:pointer;margin:5px;}
+        .btn-gray{background:#444;color:#fff;}
+        textarea,input,select{width:100%;padding:10px;background:#333;border:1px solid #555;color:#fff;border-radius:4px;margin:8px 0;}
+        .rule-text{color:#ccc;font-size:14px;line-height:1.8;margin:10px 0;padding:10px;background:#1a1a1a;border-radius:4px;}
+        .red-line{text-decoration:underline red;}
+        .grid-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:15px 0;}
+        .qr-box{width:150px;height:150px;background:#fff;margin:10px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#000;}
+        .hidden{display:none;}
+        .tag{display:inline-block;padding:3px 8px;background:#ff6600;color:#000;border-radius:3px;font-size:12px;margin:3px;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部LOGO+水印 -->
+    <div class="header">
+        <div class="logo">火眼金睛 Flame-Eyes
+            <div class="watermark">火眼金睛Flame-Eyes</div>
+        </div>
+        <div>
+            <button class="btn">多语言切换</button>
+            <button class="btn btn-gray">扫码登录二维码</button>
+        </div>
+    </div>
+
+    <!-- 导航栏（新增歌乐区） -->
+    <div class="nav-bar">
+        <div class="nav-item">电影区</div>
+        <div class="nav-item">剧集区</div>
+        <div class="nav-item">短剧区</div>
+        <div class="nav-item">直播区</div>
+        <div class="nav-item">小说区</div>
+        <div class="nav-item">漫画区</div>
+        <div class="nav-item">游戏区</div>
+        <div class="nav-item active">歌乐区【131新增】</div>
+        <div class="nav-item">AI创作中心</div>
+        <div class="nav-item">后台管理</div>
+    </div>
+
+    <!-- 101 AI标题简介封面生成 -->
+    <div class="section">
+        <div class="title">101 AI智能标题/简介/封面生成（无限重绘）</div>
+        <textarea placeholder="输入作品内容，AI自动生成标题、简介、封面图；分集章节可单独生成章节标题"></textarea>
+        <button class="btn">AI生成内容</button>
+        <button class="btn btn-gray">重新生成（无次数限制）</button>
+        <button class="btn btn-gray">上传自定义封面/简介配图</button>
+        <div class="rule-text">支持剧集/小说/漫画分集分章单独AI标题生成；简介区可AI配图，不满意无限重生成</div>
+    </div>
+
+    <!-- 102 唯一账号码系统 -->
+    <div class="section">
+        <div class="title">102 唯一账号码（10-20位+混合字符+一键复制）</div>
+        <input type="text" value="A8s9#k2m7P0x5Qr3T1z" readonly>
+        <button class="btn">一键复制账号码</button>
+        <div class="rule-text">账号码支持数字/字母/符号组合，长度自定义10位及以上，全网唯一不可重复</div>
+    </div>
+
+    <!-- 103 全新分成规则修正 -->
+    <div class="section">
+        <div class="title">103 推广分成规则修正（先分10%推广者，剩余90%平台UP主拆分）</div>
+        <div class="rule-text">示例：付费100元 → 推广账号A（输入账号码验证）先得10元；剩余90元 → 平台抽20%（18元）、UP主得80%（72元）<br>⚠️仅识别【账号码】，不识别账号名；平台可后台调整分成比例</div>
+        <input placeholder="付费用户输入推广人账号码">
+    </div>
+
+    <!-- 104 平台取消收费权限 -->
+    <div class="section">
+        <div class="title">104 平台权限：取消作品收费，收益全归UP主</div>
+        <div class="rule-text">平台可一键关闭任意作品收费通道；关闭后：推广者仍先拿10%，剩余90%全额归UP主，平台不抽成</div>
+        <button class="btn">后台操作：取消该作品收费</button>
+    </div>
+
+    <!-- 105 UP主自定义推广分成10%-30% -->
+    <div class="section">
+        <div class="title">105 UP主自主调整推广分成（10%~30%可调，开关控制）</div>
+        <select>
+            <option>10%</option>
+            <option>15%</option>
+            <option>20%</option>
+            <option>25%</option>
+            <option>30%</option>
+        </select>
+        <button class="btn">开启分成展示（前台公开可见比例）</button>
+        <button class="btn btn-gray">关闭分成功能</button>
+        <div class="rule-text">前台强制展示：分成比例、收款绑定要求、需输入账号码验证规则</div>
+    </div>
+
+    <!-- 106 百亿级转账承载 -->
+    <div class="section">
+        <div class="title">106 金融承载：同时支持100亿次费用转账处理</div>
+        <div class="rule-text">底层架构适配全球并发转账，无卡顿、无延迟、实时清算</div>
+    </div>
+
+    <!-- 107 定时发布+直播倒计时 -->
+    <div class="section">
+        <div class="title">107 定时发布功能+直播倒计时预告</div>
+        <input type="datetime-local">
+        <button class="btn">设置定时发布，自动保存草稿</button>
+        <div class="rule-text">直播设定时间后，直播间自动生成倒计时视频，用户可预约等待开播</div>
+    </div>
+
+    <!-- 108 AI错别字语法检测+自定义忽略 -->
+    <div class="section">
+        <div class="title">108 AI错别字/语法纠错（红线标注+自动修正+自定义忽略）</div>
+        <textarea placeholder="输入创作内容，错误文字自动红色下划线标注，不擅自修改；可设置指定错误不修正"></textarea>
+        <div class="rule-text">两种模式：预览红线提醒 / 生成时AI自动纠错；支持手动指定错别字故意保留</div>
+    </div>
+
+    <!-- 109 弹幕点赞踩+屏蔽+历史弹幕关键字屏蔽 -->
+    <div class="section">
+        <div class="title">109 弹幕多功能管控：点赞/点踩/屏蔽用户/历史弹幕关键字屏蔽</div>
+        <input placeholder="输入关键字，屏蔽所有含该字弹幕">
+        <button class="btn">屏蔽关键字</button>
+        <button class="btn btn-gray">屏蔽该发布者全部弹幕</button>
+        <div class="rule-text">附带历史弹幕时间列表，可查看所有弹幕记录并批量管控</div>
+    </div>
+
+    <!-- 110 直播AI背景/音效/字幕 -->
+    <div class="section">
+        <div class="title">110 直播AI特效：虚拟背景+人声台词+字幕+背景音乐（带/不带歌词）</div>
+        <button class="btn">生成AI虚拟直播背景</button>
+        <button class="btn btn-gray">添加带歌词字幕背景音乐</button>
+    </div>
+
+    <!-- 111 多语言输入生成+剪辑拼接+无限重制 -->
+    <div class="section">
+        <div class="title">111 影视/游戏AI创作：全语言支持+剪辑拼接+无限重新生成</div>
+        <textarea placeholder="支持简中/繁中/英/日/韩/法/德等任意语言输入指令"></textarea>
+        <button class="btn">AI生成影像/台词/多语言字幕</button>
+        <button class="btn btn-gray">视频剪辑&拼接</button>
+        <div class="rule-text">不满意无次数限制重生成；音视频字幕可切换全球任意语言</div>
+    </div>
+
+    <!-- 112 动态帖/小说/漫画多语言+AI语音朗读 -->
+    <div class="section">
+        <div class="title">112 图文创作多语言+AI男女声语音朗读</div>
+        <select>
+            <option>AI男声1（国语/粤语/多国语言）</option>
+            <option>AI男声2</option>
+            <option>AI女声1</option>
+            <option>AI女声2</option>
+        </select>
+        <button class="btn">开启语音朗读</button>
+        <button class="btn btn-gray">关闭语音</button>
+    </div>
+
+    <!-- 113 账号搜索@功能（名称/账号码均可） -->
+    <div class="section">
+        <div class="title">113 账号搜索&@提及：支持账号名/账号码双检索</div>
+        <input placeholder="输入账号名或账号码搜索 / @+账号名/账号码提及">
+    </div>
+
+    <!-- 114 平台后台数据管控（评论/弹幕/播放/点赞自定义） -->
+    <div class="section">
+        <div class="title">114 平台超级权限：自定义评论/弹幕/播放量/点赞/收藏/游玩数</div>
+        <button class="btn">批量生成评论/影评/弹幕</button>
+        <button class="btn btn-gray">修改播放/观看/游玩/点赞收藏数据</button>
+    </div>
+
+    <!-- 115 内容安全审核规则 -->
+    <div class="section">
+        <div class="title">115 内容风控：严禁反华/黄赌毒暴力仇恨内容管控</div>
+        <div class="rule-text">全站文字、图片、视频、私信、评论、弹幕自动审核；禁止反党反政府元素，黄赌毒暴力仅允许合规适量使用</div>
+    </div>
+
+    <!-- 116 图文实时翻译+语音同步切换 -->
+    <div class="section">
+        <div class="title">116 小说/漫画/动态帖实时多语言翻译+AI语音同步变更</div>
+        <select>
+            <option>翻译成英文</option>
+            <option>翻译成日文</option>
+            <option>翻译成俄文</option>
+        </select>
+        <button class="btn">开启翻译+语音同步</button>
+    </div>
+
+    <!-- 117 文档转剧本/分镜/小说互转 -->
+    <div class="section">
+        <div class="title">117 Word/PDF/PPT文档上传：剧本/分镜/小说双向AI转换</div>
+        <input type="file" accept=".doc,.docx,.pdf,.ppt,.pptx">
+        <button class="btn">AI转为影视/漫画/游戏剧本+分镜稿</button>
+        <button class="btn btn-gray">剧本转为网络小说+AI配图</button>
+    </div>
+
+    <!-- 118 好莱坞级画质分镜自动融入 -->
+    <div class="section">
+        <div class="title">118 AI生成内容默认好莱坞电影级画质+全自动专业分镜</div>
+        <div class="rule-text">无需手动添加分镜，全站影视/漫画/游戏自动搭载顶级画面、场效、光影水准</div>
+    </div>
+
+    <!-- 119 彩色/黑白双模式生成 -->
+    <div class="section">
+        <div class="title">119 作品配图/影像支持 彩色 / 黑白双色切换生成</div>
+        <button class="btn">彩色模式生成</button>
+        <button class="btn btn-gray">黑白模式生成</button>
+    </div>
+
+    <!-- 120 全站界面+作品多语言全局切换 -->
+    <div class="section">
+        <div class="title">120 全站按钮/规则/文字+作品标题简介全局多语言调校</div>
+        <select>
+            <option>简体中文</option>
+            <option>繁体中文</option>
+            <option>English</option>
+            <option>日本語</option>
+        </select>
+        <button class="btn">应用全局语言设置</button>
+    </div>
+
+    <!-- 121 视频进度条范围锁定快捷键 -->
+    <div class="section">
+        <div class="title">121 视频进度区间锁定：[ ]锁定、Shift+[ / Shift+]解除</div>
+        <div class="rule-text">例：1:40按[ 、2:40按]，仅可播放区间内画面；快捷键一键解锁</div>
+    </div>
+
+    <!-- 122 屏幕比例调节+全屏 -->
+    <div class="section">
+        <div class="title">122 播放屏幕：微长方形/超宽屏/全屏自由切换</div>
+        <button class="btn">超宽屏模式</button>
+        <button class="btn btn-gray">恢复默认屏</button>
+        <button class="btn">全屏播放</button>
+    </div>
+
+    <!-- 123 登录二维码（APP扫码登录） -->
+    <div class="section">
+        <div class="title">123 账号登录二维码，支持手机APP扫码登入</div>
+        <div class="qr-box">二维码区域</div>
+    </div>
+
+    <!-- 124 AI数字人账号集群+自动创作+后台管控 -->
+    <div class="section">
+        <div class="title">124 平台AI数字人账号：自动学习/自动创作/自动互动/后台可控</div>
+        <div class="rule-text">可无限新增不同人设AI账号；自动发布作品、观看互动、评论影评；平台可识别、管控、强制关注指定用户</div>
+        <button class="btn">新增AI数字人账号</button>
+    </div>
+
+    <!-- 125 全站固定水印+平台专属移除权限 -->
+    <div class="section">
+        <div class="title">125 作品右上角固定「火眼金睛Flame-Eyes」水印，仅平台可移除</div>
+        <div class="rule-text">UP主自定义水印不得遮挡官方水印，官方水印100%可见无遮挡</div>
+    </div>
+
+    <!-- 126 无限次生成分镜稿/分镜图 -->
+    <div class="section">
+        <div class="title">126 影视/漫画/游戏AI分镜稿、分镜图无限次数生成</div>
+        <button class="btn">重新生成分镜（无限制）</button>
+    </div>
+
+    <!-- 127 自定义声线录制/上传配音 -->
+    <div class="section">
+        <div class="title">127 录制/上传自定义声音，绑定角色专属声线</div>
+        <button class="btn">录制本地声音</button>
+        <input type="file" accept=".mp3,.wav">
+    </div>
+
+    <!-- 128 无字数/无时长/无篇幅上限 -->
+    <div class="section">
+        <div class="title">128 指令10万字无限制、影视6小时时长无限制、图文10万字篇幅无限制</div>
+        <textarea placeholder="可输入超长指令，无字符上限"></textarea>
+    </div>
+
+    <!-- 129 40亿用户同时AI生成无排队无卡顿 -->
+    <div class="section">
+        <div class="title">129 底层架构：支持40亿用户同时AI创作，零排队、零卡顿、秒生成</div>
+    </div>
+
+    <!-- 130 作品可见权限三级管控 -->
+    <div class="section">
+        <div class="title">130 作品权限：全员可见/仅自己可见/指定账号（名称/账号码）可见</div>
+        <select>
+            <option>全部账号可见</option>
+            <option>仅自己可见</option>
+            <option>指定账号码/账号名可见</option>
+        </select>
+        <input placeholder="输入指定账号名/账号码">
+    </div>
+
+    <!-- 131 新增歌乐区+MV生成功能 -->
+    <div class="section">
+        <div class="title">131 独立歌乐区：纯音乐/带歌词音乐视频、AI生成MV画面，适配全站所有规则</div>
+        <button class="btn">AI生成歌乐MV影像</button>
+        <button class="btn btn-gray">纯音频无画面模式</button>
+        <div class="rule-text">歌乐归类为独立影视品类，拥有评论区、个性化推送、平台数据管控全权限</div>
+    </div>
+
+    <!-- 132 评论影评综合排序（点赞+回复权重） -->
+    <div class="section">
+        <div class="title">132 评论/影评排序规则：点赞+回复数综合加权，越高越靠前</div>
+    </div>
+
+    <!-- 133 UP主评论层级置顶管理 -->
+    <div class="section">
+        <div class="title">133 UP主后台：评论置顶+多层级排序，回复跟随主评论层级</div>
+        <button class="btn">评论置顶</button>
+        <button class="btn btn-gray">设置二级/三级/末级排序</button>
+    </div>
+
+    <!-- 134 无版权声音禁用规则 -->
+    <div class="section">
+        <div class="title">134 版权管控：无版权人物声音禁止商用创作，直播/短视频适度放宽</div>
+    </div>
+
+    <!-- 135 IP版权自用保护规则 -->
+    <div class="section">
+        <div class="title">135 原创IP保护：UP主自有平台/自制IP可复用，他人禁止盗用（直播动态帖放宽）</div>
+    </div>
+
+    <!-- 136 创作页版权规则强制公示 -->
+    <div class="section">
+        <div class="title">136 创作页面强制展示：无版权IP/肖像/声音禁止创作警示规则</div>
+        <div class="rule-text">⚠️温馨提示：禁止使用未授权IP、人物肖像、人物声线进行影视/小说/漫画/歌乐/游戏创作，违规后果自负</div>
+    </div>
+</div>
+
+<script>
+// 模拟核心交互逻辑
+// 1.账号码复制
+document.querySelector('.qr-box').previousElementSibling.querySelector('button').addEventListener('click',function(){
+    let code = document.querySelector('input[value="A8s9#k2m7P0x5Qr3T1z"]').value;
+    navigator.clipboard.writeText(code);
+    alert("账号码复制成功："+code);
+});
+
+// 2.快捷键模拟（进度锁定）
+document.addEventListener('keydown',function(e){
+    if(e.key === '[') alert("已锁定播放起始点");
+    if(e.key === ']') alert("已锁定播放结束点");
+    if(e.shiftKey && (e.key === '[' || e.key === ']')) alert("已解除区间锁定");
+});
+
+// 3.多语言切换模拟
+document.querySelectorAll('select').forEach(sel=>{
+    sel.addEventListener('change',function(){
+        alert("已切换语言/模式设置");
+    });
+});
+
+// 4.AI生成按钮通用模拟
+document.querySelectorAll('.btn').forEach(btn=>{
+    if(btn.innerText.includes('生成')){
+        btn.addEventListener('click',function(){
+            alert("AI正在生成，无次数限制、无篇幅时长限制，好莱坞画质加持");
+        });
+    }
+});
+</script>
+</body>
+</html>
