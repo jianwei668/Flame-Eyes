@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>火眼金睛 Flame-Eyes Gold Pupils | 全功能平台</title>
+    <title>火眼金睛 FlameEyes GoldPupils | 全功能平台</title>
     <style>
         /* ==================== 加载闪屏 ==================== */
         .splash-screen {
@@ -77,11 +77,6 @@
             color: var(--text);
             transition: background-color 0.3s, color 0.3s, background 0.3s;
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-        img, video, canvas {
-            max-width: 100%;
-            display: block;
         }
         body.dark {
             --bg: #111827; --bg-secondary: #1F2937; --text: #F9FAFB;
@@ -315,8 +310,7 @@
 
         /* ==================== 内容区 ==================== */
         .content-area {
-            flex: 1; padding: 24px; overflow-y: auto; overflow-x: hidden; max-height: calc(100vh - 64px);
-            min-width: 0;
+            flex: 1; padding: 24px; overflow-y: auto; max-height: calc(100vh - 64px);
         }
         .page-section { display: none; }
         .page-section.active { display: block; }
@@ -1664,6 +1658,84 @@
             font-size: 12px;
             font-weight: 700;
         }
+
+        /* === 游戏对话区 === */
+        .game-chat-panel {
+            padding: 22px 26px;
+        }
+        .game-chat-box {
+            height: 260px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 14px;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .game-chat-msg {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+            max-width: 78%;
+            word-break: break-word;
+        }
+        .game-chat-msg.is-system {
+            background: rgba(59,130,246,0.10);
+            color: var(--info);
+            align-self: center;
+            max-width: 90%;
+            text-align: center;
+            font-size: 12px;
+        }
+        .game-chat-msg.is-self {
+            background: var(--primary);
+            color: #fff;
+            align-self: flex-end;
+        }
+        .game-chat-msg.is-other {
+            background: var(--glass-fill-strong);
+            align-self: flex-start;
+        }
+        .game-chat-input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .game-chat-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .game-chat-input:focus {
+            border-color: var(--primary);
+        }
+        .game-chat-voice-btn {
+            white-space: nowrap;
+            font-size: 13px;
+        }
+        .game-chat-voice-btn.is-recording {
+            background: var(--danger) !important;
+            color: #fff !important;
+            animation: chat-pulse 0.8s ease-in-out infinite;
+        }
+        @keyframes chat-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .game-chat-send-btn {
+            white-space: nowrap;
+        }
+
         body.dark .game-page-kicker,
         body.dark .game-page-badge,
         body.dark .game-hero-main,
@@ -2023,6 +2095,36 @@
         .creator-panel { display: none; }
         .creator-panel.active { display: block; }
 
+        /* 创作分区 Tab */
+        .creation-zone-tabs {
+            display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 12px; padding: 8px 10px;
+            border-radius: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+        }
+        body.dark .creation-zone-tabs { background: rgba(30,30,50,0.2); border-color: rgba(255,255,255,0.08); }
+        .creation-zone-tab {
+            padding: 7px 14px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 500;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: var(--text);
+            transition: all .25s; white-space: nowrap;
+        }
+        body.dark .creation-zone-tab { background: rgba(30,30,50,0.15); border-color: rgba(255,255,255,0.08); }
+        .creation-zone-tab:hover { transform: translateY(-1px); background: rgba(255,255,255,0.25); }
+        .creation-zone-tab.active {
+            background: linear-gradient(135deg, rgba(230,57,70,0.85), rgba(230,57,70,0.7));
+            color: #fff; border-color: rgba(255,255,255,0.25);
+            box-shadow: 0 3px 12px rgba(230,57,70,0.25);
+        }
+        .creation-zone-banner {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px; margin-bottom: 14px;
+            border-radius: 12px; background: linear-gradient(135deg, rgba(230,57,70,0.08), rgba(255,183,77,0.08));
+            border: 1px solid rgba(230,57,70,0.15); color: var(--text);
+        }
+        body.dark .creation-zone-banner { background: linear-gradient(135deg, rgba(230,57,70,0.12), rgba(255,183,77,0.1)); border-color: rgba(230,57,70,0.2); }
+        .creation-zone-icon { font-size: 28px; }
+        .cp-game-code-upload {
+            border-top: 1px dashed rgba(230,57,70,0.25); padding-top: 12px; margin-top: 12px;
+        }
+
         .creator-tabs {
             display: flex;
             width: 100%;
@@ -2133,14 +2235,12 @@
             display: grid;
             grid-template-columns: repeat(6, minmax(0, 1fr));
             gap: 14px;
-            align-items: stretch;
-            min-width: 0;
         }
         .workspace-summary-card {
             position: relative;
             overflow: hidden;
             min-height: 136px;
-            padding: 22px 20px;
+            padding: 20px;
             border-radius: 22px;
             background: rgba(255,255,255,0.24);
             backdrop-filter: blur(42px) saturate(1.5);
@@ -2173,10 +2273,6 @@
             line-height: 1;
             font-weight: 800;
             color: var(--workspace-accent);
-            letter-spacing: -0.02em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         .workspace-summary-meta {
             margin-top: 10px;
@@ -2659,6 +2755,52 @@
         .cp-asset-icon { font-size: 32px; margin-bottom: 8px; }
         .cp-asset-name { font-size: 13px; font-weight: 600; }
         .cp-asset-meta { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+
+        /* ==================== 分类频道页 ─ 顶栏+视图切换 ==================== */
+        .category-topbar {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .category-topbar-left {
+            flex: 1;
+            min-width: 0;
+        }
+        .category-topbar-right {
+            flex-shrink: 0;
+            padding-top: 6px;
+        }
+        .category-view-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            background: var(--glass-fill);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .category-view-toggle:hover {
+            background: var(--glass-fill-strong);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .category-view-toggle.is-active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        .category-cards-view {
+            margin-bottom: 22px;
+        }
+        .category-data-view {
+            margin-bottom: 22px;
+        }
 
         /* ==================== 分类频道页增强 ==================== */
         .category-page-hero {
@@ -3395,6 +3537,27 @@
             color: var(--text);
             margin-bottom: 14px;
         }
+        /* ── 动态帖 免费/付费内容分割 ── */
+        .post-free-part { color: var(--text); line-height: 1.9; font-size: 15px; margin-bottom: 10px; }
+        .post-divider-line {
+            border: none; border-top: 2px dashed var(--primary); margin: 18px 0; position: relative;
+        }
+        .post-divider-line::after {
+            content: '── 以下为付费内容 ──'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            background: var(--card-bg); padding: 0 14px; font-size: 12px; color: var(--primary); white-space: nowrap;
+        }
+        .post-paid-part {
+            color: var(--text-secondary); background: rgba(255,107,0,0.08); padding: 16px; border-radius: 12px;
+            filter: blur(4px); user-select: none; pointer-events: none; line-height: 1.9; font-size: 15px;
+        }
+        .post-paid-part.unlocked { filter: none; user-select: auto; pointer-events: auto; }
+        .post-pay-btn {
+            display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+            padding: 10px 28px; border-radius: 20px; border: none; cursor: pointer;
+            background: linear-gradient(135deg, var(--primary), #ff6b00); color: #fff;
+            font-size: 15px; font-weight: 600; transition: transform .15s;
+        }
+        .post-pay-btn:hover { transform: scale(1.04); }
         .detail-side-list { display: flex; flex-direction: column; gap: 10px; }
         .detail-side-item {
             padding: 12px 14px;
@@ -4423,7 +4586,6 @@
             gap: 28px;
             padding: 8px 0 34px;
             isolation: isolate;
-            overflow-x: clip;
         }
         .workspace-page.active::before,
         .workspace-page.active::after {
@@ -6410,7 +6572,7 @@
     <div class="splash-screen" id="splashScreen">
         <img src="logo.jpg" alt="火眼金睛" class="splash-logo">
         <div class="splash-title">火眼金睛</div>
-        <div class="splash-subtitle">Flame-Eyes Gold Pupils</div>
+        <div class="splash-subtitle">FlameEyes GoldPupils</div>
         <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
     </div>
 
@@ -6419,10 +6581,10 @@
         <div class="logo" onclick="switchPage('home')">
             <img src="logo.jpg" alt="火眼金睛">
             <div class="logo-copy">
-                <span class="logo-text">火眼金睛 Flame-Eyes</span>
+                <span class="logo-text">火眼金睛 FlameEyes</span>
                 <div class="logo-meta">
                     <span class="logo-badge">Brand</span>
-                    <span class="creator-info" onclick="event.stopPropagation();alert('火眼金睛 Flame-Eyes Gold Pupils\n创始人：Han Joong Yan\n联系：deadly9deadly@gmail.com')">平台创作者介绍</span>
+                    <span class="creator-info" onclick="event.stopPropagation();alert('火眼金睛 FlameEyes GoldPupils\n创始人：Han Joong Yan\n联系：deadly9deadly@gmail.com')">平台创作者介绍</span>
                 </div>
             </div>
         </div>
@@ -6728,7 +6890,7 @@
                 <button class="btn btn-ghost" onclick="switchPage('home')" style="margin-bottom:16px;"><i class="fas fa-arrow-left"></i> 返回首页</button>
                 <div class="player-container">
                     <div class="video-player" id="videoPlayerShell">
-                        <div class="official-watermark-badge" id="officialPlayerWatermark">火眼金睛 Flame-Eyes</div>
+                        <div class="official-watermark-badge" id="officialPlayerWatermark">火眼金睛 FlameEyes</div>
                         <video id="videoElement" controls>
                             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                         </video>
@@ -6766,6 +6928,31 @@
                             </div>
                             <div class="player-control-status" id="playerScreenModeStatus">当前：标准 16:9，可自由切换微长方形、超宽屏与全屏。</div>
                         </div>
+                        <div class="player-control-card">
+                            <div class="player-control-title">🔊 音量控制（0–1000）</div>
+                            <div class="player-control-actions" style="align-items:center;">
+                                <input type="range" id="playerVolumeSlider" min="0" max="1000" value="100" style="flex:1;min-width:120px;cursor:pointer;" oninput="setPlayerVolume(this.value)">
+                                <span id="playerVolumeValue" style="min-width:36px;text-align:center;font-size:13px;font-weight:600;">100</span>
+                                <button class="btn btn-ghost btn-sm" onclick="setPlayerVolume(0)">静音</button>
+                                <button class="btn btn-ghost btn-sm" onclick="setPlayerVolume(100)">默认</button>
+                            </div>
+                            <div class="player-control-status" id="playerVolumeStatus">音量范围 0–1000，默认 100。超过 100 为增益放大。</div>
+                        </div>
+                        <div class="player-control-card">
+                            <div class="player-control-title">🪞 画面镜像</div>
+                            <div class="player-control-actions">
+                                <button class="btn btn-ghost btn-sm" id="playerMirrorBtn" onclick="togglePlayerMirror()">开启镜像</button>
+                            </div>
+                            <div class="player-control-status" id="playerMirrorStatus">当前：正常画面。点击可水平翻转视频画面。</div>
+                        </div>
+                        <div class="player-control-card">
+                            <div class="player-control-title">💰 免费/付费分段</div>
+                            <div class="player-control-actions" style="font-size:12px;flex-wrap:wrap;">
+                                <span style="padding:5px 10px;border-radius:8px;background:rgba(40,167,69,0.15);color:var(--success);">免费时段: 0–10 分钟</span>
+                                <span style="padding:5px 10px;border-radius:8px;background:rgba(230,57,70,0.12);color:var(--primary);">付费时段: 10 分钟起 | ¥15.00</span>
+                            </div>
+                            <div class="player-control-status" id="playerSegmentStatus">创作者设定的免费/付费时间段。付费部分需完成支付后解锁。</div>
+                        </div>
                     </div>
                     <!-- 弹幕发送 -->
                     <div style="display:flex;gap:8px;margin-top:16px;align-items:center;">
@@ -6775,14 +6962,17 @@
                     <div class="comment-section">
                         <h3 style="margin-bottom:12px;">评论区</h3>
                         <textarea class="comment-input" id="commentInput" placeholder="发表评论...支持@其他用户和表情"></textarea>
-                        <button class="btn btn-primary" style="margin-top:8px;" onclick="postComment()">发送评论</button>
+                        <div style="display:flex;gap:8px;margin-top:8px;">
+                            <button class="btn btn-primary" onclick="postComment()">发送评论</button>
+                            <button class="btn btn-ghost btn-sm" onclick="startVoiceInput('commentInput')">🎤 录音转文字</button>
+                        </div>
                         <div class="comment-list" id="commentList">
                             <div class="comment-item" oncontextmenu="showRightMenu(event)">
                                 <div class="comment-avatar">A</div>
                                 <div class="comment-content">
                                     <div class="comment-author">用户A</div>
                                     <div class="comment-text">这部短剧太好看了！@用户B 快来看看</div>
-                                    <div class="comment-actions"><span>👍 128</span> <span>💬 回复</span> <span>📋 复制</span></div>
+                                    <div class="comment-actions"><span onclick="toggleCommentLike(this)" style="cursor:pointer">👍 128</span> <span onclick="replyToComment(this)" style="cursor:pointer">💬 回复</span> <span onclick="copyCommentText(this)" style="cursor:pointer">📋 复制</span></div>
                                 </div>
                             </div>
                             <div class="comment-item" oncontextmenu="showRightMenu(event)">
@@ -6790,7 +6980,7 @@
                                 <div class="comment-content">
                                     <div class="comment-author">用户C</div>
                                     <div class="comment-text">剧情节奏很棒，强烈推荐收藏 ✨</div>
-                                    <div class="comment-actions"><span>👍 56</span> <span>💬 回复</span> <span>📋 复制</span></div>
+                                    <div class="comment-actions"><span onclick="toggleCommentLike(this)" style="cursor:pointer">👍 56</span> <span onclick="replyToComment(this)" style="cursor:pointer">💬 回复</span> <span onclick="copyCommentText(this)" style="cursor:pointer">📋 复制</span></div>
                                 </div>
                             </div>
                         </div>
@@ -6878,7 +7068,27 @@
                     </div>
                     <div class="cp-section">
                         <div class="cp-section-title">上传作品</div>
-                        <div class="workspace-section-note">左侧维护标题、类型与简介，右侧集中处理文件和发布动作，减少首屏表单同时出现带来的压迫感。</div>
+                        <div class="workspace-section-note">选择内容创作区，每个区拥有独立的创作工具和发布流程。游戏区额外支持代码包上传。</div>
+                        <!-- 创作分区 Tab 子栏 -->
+                        <div class="creation-zone-tabs" id="creationZoneTabs">
+                            <div class="creation-zone-tab active" data-zone="视频" onclick="switchCreationZone('视频')">🎬 视频区</div>
+                            <div class="creation-zone-tab" data-zone="电影" onclick="switchCreationZone('电影')">🎞️ 电影区</div>
+                            <div class="creation-zone-tab" data-zone="剧集" onclick="switchCreationZone('剧集')">📺 剧集区</div>
+                            <div class="creation-zone-tab" data-zone="短剧" onclick="switchCreationZone('短剧')">⚡ 短剧区</div>
+                            <div class="creation-zone-tab" data-zone="小说" onclick="switchCreationZone('小说')">📖 小说区</div>
+                            <div class="creation-zone-tab" data-zone="漫画" onclick="switchCreationZone('漫画')">🎨 漫画区</div>
+                            <div class="creation-zone-tab" data-zone="游戏" onclick="switchCreationZone('游戏')">🎮 游戏区</div>
+                            <div class="creation-zone-tab" data-zone="直播" onclick="switchCreationZone('直播')">📡 直播区</div>
+                            <div class="creation-zone-tab" data-zone="歌乐" onclick="switchCreationZone('歌乐')">🎵 歌乐区</div>
+                            <div class="creation-zone-tab" data-zone="动态" onclick="switchCreationZone('动态')">📝 动态区</div>
+                        </div>
+                        <div class="creation-zone-banner" id="creationZoneBanner">
+                            <span class="creation-zone-icon" id="creationZoneIcon">🎬</span>
+                            <div>
+                                <strong id="creationZoneLabel">视频区创作</strong>
+                                <div id="creationZoneDesc" style="font-size:12px;opacity:.7;margin-top:2px;">上传原创视频内容，支持 AI 辅助生成标题与封面。</div>
+                            </div>
+                        </div>
                         <div class="cp-ai-helper-grid">
                             <div class="cp-feature-card">
                                 <div class="cp-fc-title">✨ AI标题/简介/封面生成</div>
@@ -6915,7 +7125,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="cp-rule-preview" id="creativeCapacityStatus"><strong>无限篇幅模式已开启</strong><span>支持长指令、长视频、长图文和长章节创作。</span></div>
+                        <div class="cp-rule-preview" id="creativeCapacityStatus" style="margin-bottom:18px;overflow:hidden;position:relative;z-index:1;"><strong>无限篇幅模式已开启</strong><span>支持长指令、长视频、长图文和长章节创作。</span></div>
                         <div class="cp-upload-form">
                             <div class="cp-form-left">
                                 <div class="cp-form-card-head">
@@ -6923,11 +7133,108 @@
                                     <div class="cp-form-card-copy">标题、类型和简介集中在左侧，方便连续填写。</div>
                                 </div>
                                 <input class="input cp-input" id="workTitle" placeholder="作品标题">
-                                <select class="input cp-input" id="workType">
+                                <button class="btn btn-ghost btn-sm" onclick="startVoiceInput('workTitle')" style="margin-top:4px;font-size:12px;">🎤 录音转文字</button>
+                                <!-- 标题字体/颜色设置 -->
+                                <div style="display:flex;gap:8px;align-items:center;margin-top:6px;">
+                                    <select class="input cp-input" id="workTitleFont" style="flex:1;min-width:0;" onchange="previewWorkStyle()">
+                                        <option value="default">默认字体</option>
+                                        <option value="宋体">宋体</option>
+                                        <option value="黑体">黑体</option>
+                                        <option value="楷体">楷体</option>
+                                    </select>
+                                    <label style="font-size:12px;color:var(--text-secondary);white-space:nowrap;display:flex;align-items:center;gap:4px;">标题色 <input type="color" id="workTitleColor" value="#ffffff" style="width:28px;height:28px;border:none;background:none;cursor:pointer;" onchange="previewWorkStyle()"></label>
+                                </div>
+                                <select class="input cp-input" id="workType" onchange="onWorkTypeChange()">
                                     <option>视频</option><option>电影</option><option>剧集</option><option>短剧</option>
                                     <option>小说</option><option>漫画</option><option>游戏</option><option>直播</option><option>歌乐</option>
                                 </select>
                                 <textarea class="textarea cp-textarea" id="workDesc" placeholder="作品简介（选填）" rows="3"></textarea>
+                                <button class="btn btn-ghost btn-sm" onclick="startVoiceInput('workDesc')" style="margin-top:4px;font-size:12px;">🎤 录音转文字</button>
+                                <!-- 简介字体/颜色设置 -->
+                                <div style="display:flex;gap:8px;align-items:center;margin-top:4px;">
+                                    <select class="input cp-input" id="workDescFont" style="flex:1;min-width:0;" onchange="previewWorkStyle()">
+                                        <option value="default">默认字体</option>
+                                        <option value="宋体">宋体</option>
+                                        <option value="黑体">黑体</option>
+                                        <option value="楷体">楷体</option>
+                                    </select>
+                                    <label style="font-size:12px;color:var(--text-secondary);white-space:nowrap;display:flex;align-items:center;gap:4px;">简介色 <input type="color" id="workDescColor" value="#cccccc" style="width:28px;height:28px;border:none;background:none;cursor:pointer;" onchange="previewWorkStyle()"></label>
+                                </div>
+
+                                <!-- 时间分段付费设置 -->
+                                <div class="cp-form-card-head" style="margin-top:14px;">
+                                    <div class="cp-form-card-title">💰 时间分段付费</div>
+                                    <div class="cp-form-card-copy">设置内容的免费时段和付费时段（最低 ¥1）。</div>
+                                </div>
+                                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                    <div class="cp-feature-card" style="flex:1;min-width:180px;padding:12px;">
+                                        <div style="font-weight:600;font-size:13px;margin-bottom:8px;">免费时段</div>
+                                        <div style="display:flex;gap:6px;align-items:center;font-size:12px;">
+                                            <span>开始</span><input class="input cp-input" id="freeSegStart" type="number" min="0" value="0" style="width:70px;padding:6px 8px;">
+                                            <span>~结束</span><input class="input cp-input" id="freeSegEnd" type="number" min="0" value="10" style="width:70px;padding:6px 8px;">
+                                            <span>分钟</span>
+                                        </div>
+                                    </div>
+                                    <div class="cp-feature-card" style="flex:1;min-width:180px;padding:12px;">
+                                        <div style="font-weight:600;font-size:13px;margin-bottom:8px;">付费时段</div>
+                                        <div style="display:flex;gap:6px;align-items:center;font-size:12px;">
+                                            <span>开始</span><input class="input cp-input" id="paidSegStart" type="number" min="0" value="10" style="width:70px;padding:6px 8px;">
+                                            <span>分钟</span>
+                                        </div>
+                                        <div style="display:flex;gap:6px;align-items:center;font-size:12px;margin-top:6px;">
+                                            <span>价格</span><input class="input cp-input" id="paidSegPrice" type="number" min="1" value="15" style="width:70px;padding:6px 8px;">
+                                            <span>元</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 观看期限与次数设置 -->
+                                <div class="cp-form-card-head" style="margin-top:14px;">
+                                    <div class="cp-form-card-title">⏱️ 观看期限与次数</div>
+                                    <div class="cp-form-card-copy">设定观众购买后的观看有效期和可看次数。</div>
+                                </div>
+                                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                    <div style="flex:1;min-width:120px;">
+                                        <label style="font-size:12px;color:var(--text-secondary);">观看期限</label>
+                                        <select class="input cp-input" id="watchPeriod" style="margin-top:4px;">
+                                            <option value="7">7天</option>
+                                            <option value="30" selected>30天</option>
+                                            <option value="365">1年</option>
+                                            <option value="infinite">无限</option>
+                                        </select>
+                                    </div>
+                                    <div style="flex:1;min-width:120px;">
+                                        <label style="font-size:12px;color:var(--text-secondary);">观看次数</label>
+                                        <select class="input cp-input" id="watchCount" style="margin-top:4px;">
+                                            <option value="5">5次</option>
+                                            <option value="10" selected>10次</option>
+                                            <option value="infinite">无限</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- 创作条例 -->
+                                <div class="cp-feature-card" style="margin-top:14px;padding:14px;font-size:12px;line-height:1.8;">
+                                    <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:var(--primary);">📜 创作条例（必须阅读）</div>
+                                    <p>A. 本平台用AI进行的一切创作均为免费</p>
+                                    <p>B. 您没有版权的IP、人物肖像、人物声音不能用在平台的影视、小说、漫画、游戏的创作和发布</p>
+                                    <p>C. 本平台为香港公司"神话工作室有限公司 Myth Studios Limited"旗下之平台，在本平台发布的一切作品均视为香港平台发布之作品</p>
+                                    <p>D. 请先绑定收款账号，以便在本平台自由进行的付费和收费</p>
+                                    <p>E. 本平台的功能和制度已申请专利，请其他所有公司不要模仿</p>
+                                </div>
+                                <!-- 游戏区专属：代码包上传 -->
+                                <div class="cp-game-code-upload" id="gameCodeUploadSection" style="display:none;">
+                                    <div class="cp-form-card-head" style="margin-top:12px;">
+                                        <div class="cp-form-card-title">📦 游戏代码包</div>
+                                        <div class="cp-form-card-copy">游戏区专属功能：上传游戏代码包（.zip / .rar / .7z），平台会自动部署为在线可玩版本。</div>
+                                    </div>
+                                    <div class="cp-file-upload">
+                                        <button class="btn btn-ghost" onclick="document.getElementById('gameCodeFile').click()">选择代码包</button>
+                                        <span id="gameCodeFileName" style="font-size:12px;color:var(--text-secondary);">未选择文件</span>
+                                    </div>
+                                    <input type="file" id="gameCodeFile" accept=".zip,.rar,.7z,.tar.gz" style="display:none;" onchange="document.getElementById('gameCodeFileName').textContent=this.files[0]?this.files[0].name:'未选择文件'">
+                                    <div class="cp-mini-note">支持 HTML5 游戏、Unity WebGL 导出包、Godot Web 导出等可浏览器运行的游戏资源。</div>
+                                </div>
                             </div>
                             <div class="cp-form-right">
                                 <div class="cp-form-card-head">
@@ -7681,6 +7988,7 @@
                                 <div style="display:flex;gap:8px;margin-top:8px;">
                                     <button class="btn btn-primary btn-sm" onclick="searchAccount()">🔎 搜索账号</button>
                                     <button class="btn btn-info btn-sm" onclick="mentionAccount()">@ 提及用户</button>
+                                    <button class="btn btn-ghost btn-sm" onclick="startVoiceInput('accountSearchInput')">🎤 录音转文字</button>
                                 </div>
                                 <div class="cp-mini-note">支持账号名/账号码双检索，评论区和私信均可@提及</div>
                             </div>
@@ -8072,7 +8380,7 @@
                         </div>
                         <div class="workspace-summary-card">
                             <div class="workspace-summary-label">钱包余额</div>
-                            <div class="workspace-summary-value">¥2,840</div>
+                            <div class="workspace-summary-value" id="walletBalanceDisplay">¥2,840</div>
                             <div class="workspace-summary-meta">充值、积分和优惠券统一收在账户资产模块里，不再分散展示。</div>
                         </div>
                         <div class="workspace-summary-card">
@@ -8121,6 +8429,8 @@
                             </div>
                         </div>
                         <button class="btn btn-ghost btn-sm" onclick="editProfile()">编辑资料</button>
+                        <button class="btn btn-ghost btn-sm" onclick="editAvatarBeauty()">✨ 美颜</button>
+                        <button class="btn btn-ghost btn-sm" onclick="editAvatarEffect()">🐾 特效滤镜</button>
                     </div>
 
                     <div class="cp-section account-identity-section">
@@ -8216,13 +8526,15 @@
                     <div class="cp-section">
                         <div class="cp-section-title">观看历史</div>
                         <div style="display:flex;gap:10px;margin-bottom:16px;">
-                            <button class="btn btn-info btn-sm" onclick="showViewHistory()">查看记录</button>
-                            <button class="btn btn-danger btn-sm" onclick="deleteSingleHistory()">删除单条</button>
-                            <button class="btn btn-ghost btn-sm" onclick="alert('已清空全部历史')">清空记录</button>
+                            <button class="btn btn-info btn-sm" onclick="renderWatchHistoryUI()">🔄 刷新记录</button>
+                            <button class="btn btn-danger btn-sm" onclick="clearOneWatchHistory()">删除最近一条</button>
+                            <button class="btn btn-ghost btn-sm" onclick="clearAllWatchHistory()">清空记录</button>
                         </div>
-                        <div class="cp-empty-state">
-                            <div style="font-size:48px;opacity:0.3;margin-bottom:12px;">🕐</div>
-                            <p style="color:var(--text-secondary);">暂无观看历史</p>
+                        <div id="watchHistoryList">
+                            <div class="cp-empty-state" id="watchHistoryEmpty">
+                                <div style="font-size:48px;opacity:0.3;margin-bottom:12px;">🕐</div>
+                                <p style="color:var(--text-secondary);">暂无观看历史，浏览内容后记录将自动保存</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -8249,26 +8561,107 @@
                 <!-- ========== STab 4: 私信消息 ========== -->
                 <div class="creator-panel" id="stab-chat">
                     <div class="cp-section">
-                        <div class="cp-section-title">私信消息</div>
-                        <p class="cp-fc-desc">支持消息回复、图片发送、文件发送与内容复制。</p>
-
-                        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
-                            <button class="btn btn-info btn-sm" onclick="addEmoji()">插入表情</button>
-                            <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
-                                上传图片
-                                <input type="file" accept="image/*" onchange="if(this.files[0])alert('图片上传成功：'+this.files[0].name)" style="display:none;">
-                            </label>
-                            <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
-                                上传文档
-                                <input type="file" accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx" onchange="if(this.files[0])alert('文档上传成功：'+this.files[0].name)" style="display:none;">
-                            </label>
+                        <div class="cp-section-title">📬 消息与通知</div>
+                        <!-- 通知分区 Tab -->
+                        <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+                            <button class="btn btn-primary btn-sm" id="notifTabDM" onclick="switchNotifTab('dm')">💬 私信区</button>
+                            <button class="btn btn-ghost btn-sm" id="notifTabReply" onclick="switchNotifTab('reply')">💬 回复通知区</button>
+                            <button class="btn btn-ghost btn-sm" id="notifTabAt" onclick="switchNotifTab('at')">@ @通知区</button>
+                            <button class="btn btn-ghost btn-sm" id="notifTabSystem" onclick="switchNotifTab('system')">🔔 系统通知区</button>
                         </div>
 
-                        <textarea class="textarea cp-textarea" id="msgInput" placeholder="输入私信内容" rows="3"></textarea>
-                        <button class="btn btn-success btn-sm" style="margin-top:8px;" onclick="sendMsg()">发送消息</button>
+                        <!-- 私信区 -->
+                        <div class="notif-panel active" id="notifDM">
+                            <p class="cp-fc-desc">支持消息回复、图片发送、文件发送与内容复制。</p>
+                            <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+                                <button class="btn btn-info btn-sm" onclick="addEmoji()">插入表情</button>
+                                <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
+                                    上传图片
+                                    <input type="file" accept="image/*" onchange="if(this.files[0])alert('图片上传成功：'+this.files[0].name)" style="display:none;">
+                                </label>
+                                <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
+                                    上传文档
+                                    <input type="file" accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx" onchange="if(this.files[0])alert('文档上传成功：'+this.files[0].name)" style="display:none;">
+                                </label>
+                            </div>
+                            <textarea class="textarea cp-textarea" id="msgInput" placeholder="输入私信内容" rows="3"></textarea>
+                            <button class="btn btn-success btn-sm" style="margin-top:8px;" onclick="sendMsg()">发送消息</button>
+                            <div id="chatBox" style="margin-top:16px;min-height:80px;background:rgba(255,255,255,0.06);border-radius:10px;padding:12px;">
+                                <p style="color:var(--text-secondary);font-size:13px;text-align:center;">暂无消息</p>
+                            </div>
+                        </div>
 
-                        <div id="chatBox" style="margin-top:16px;min-height:80px;background:rgba(255,255,255,0.06);border-radius:10px;padding:12px;">
-                            <p style="color:var(--text-secondary);font-size:13px;text-align:center;">暂无消息</p>
+                        <!-- 回复通知区 -->
+                        <div class="notif-panel" id="notifReply" style="display:none;">
+                            <div style="text-align:right;margin-bottom:8px;"><button class="btn btn-ghost btn-sm" onclick="markAllNotifRead(this)">✅ 全部已读</button></div>
+                            <div class="cp-feature-card notif-card" style="margin-bottom:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;">
+                                <div>
+                                    <div style="font-weight:600;font-size:13px;">🔴 用户「小明」回复了你的评论</div>
+                                    <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">"这部电影确实不错，感谢推荐！"</div>
+                                </div>
+                                <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+                                    <span style="font-size:11px;color:var(--text-secondary);white-space:nowrap;">2026-04-17 15:30</span>
+                                    <button class="btn btn-ghost btn-sm" onclick="markNotifRead(this)" style="font-size:11px;padding:2px 6px;">已读</button>
+                                    <button class="btn btn-ghost btn-sm" onclick="deleteNotif(this)" style="font-size:11px;padding:2px 6px;color:var(--danger);">删除</button>
+                                </div>
+                            </div>
+                            <div class="cp-feature-card notif-card" style="margin-bottom:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;">
+                                <div>
+                                    <div style="font-weight:600;font-size:13px;">🔴 用户「剧评达人」回复了你的影评</div>
+                                    <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">"分析得很专业，已关注！"</div>
+                                </div>
+                                <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+                                    <span style="font-size:11px;color:var(--text-secondary);white-space:nowrap;">2026-04-17 14:20</span>
+                                    <button class="btn btn-ghost btn-sm" onclick="markNotifRead(this)" style="font-size:11px;padding:2px 6px;">已读</button>
+                                    <button class="btn btn-ghost btn-sm" onclick="deleteNotif(this)" style="font-size:11px;padding:2px 6px;color:var(--danger);">删除</button>
+                                </div>
+                            </div>
+                            <p style="text-align:center;color:var(--text-secondary);font-size:13px;margin-top:12px;">— 没有更多通知了 —</p>
+                        </div>
+
+                        <!-- @通知区 -->
+                        <div class="notif-panel" id="notifAt" style="display:none;">
+                            <div style="text-align:right;margin-bottom:8px;"><button class="btn btn-ghost btn-sm" onclick="markAllNotifRead(this)">✅ 全部已读</button></div>
+                            <div class="cp-feature-card notif-card" style="margin-bottom:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;">
+                                <div>
+                                    <div style="font-weight:600;font-size:13px;">🔴 用户「大导演」在评论区@了你</div>
+                                    <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">"@你 快来看看这个新作品"</div>
+                                </div>
+                                <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+                                    <span style="font-size:11px;color:var(--text-secondary);white-space:nowrap;">2026-04-17 16:00</span>
+                                    <button class="btn btn-ghost btn-sm" onclick="markNotifRead(this)" style="font-size:11px;padding:2px 6px;">已读</button>
+                                    <button class="btn btn-ghost btn-sm" onclick="deleteNotif(this)" style="font-size:11px;padding:2px 6px;color:var(--danger);">删除</button>
+                                </div>
+                            </div>
+                            <p style="text-align:center;color:var(--text-secondary);font-size:13px;margin-top:12px;">— 没有更多@通知了 —</p>
+                        </div>
+
+                        <!-- 系统通知区 -->
+                        <div class="notif-panel" id="notifSystem" style="display:none;">
+                            <div style="text-align:right;margin-bottom:8px;"><button class="btn btn-ghost btn-sm" onclick="markAllNotifRead(this)">✅ 全部已读</button></div>
+                            <div class="cp-feature-card notif-card" style="margin-bottom:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;">
+                                <div>
+                                    <div style="font-weight:600;font-size:13px;">🔴 系统通知：你的作品已通过审核</div>
+                                    <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">作品《未来之旅》已上线发布。</div>
+                                </div>
+                                <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+                                    <span style="font-size:11px;color:var(--text-secondary);white-space:nowrap;">2026-04-17 10:00</span>
+                                    <button class="btn btn-ghost btn-sm" onclick="markNotifRead(this)" style="font-size:11px;padding:2px 6px;">已读</button>
+                                    <button class="btn btn-ghost btn-sm" onclick="deleteNotif(this)" style="font-size:11px;padding:2px 6px;color:var(--danger);">删除</button>
+                                </div>
+                            </div>
+                            <div class="cp-feature-card notif-card" style="margin-bottom:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;">
+                                <div>
+                                    <div style="font-weight:600;font-size:13px;">🔴 平台公告：新版创作工具上线</div>
+                                    <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">创作中心新增 AI 生成封面与标题功能。</div>
+                                </div>
+                                <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+                                    <span style="font-size:11px;color:var(--text-secondary);white-space:nowrap;">2026-04-16 09:00</span>
+                                    <button class="btn btn-ghost btn-sm" onclick="markNotifRead(this)" style="font-size:11px;padding:2px 6px;">已读</button>
+                                    <button class="btn btn-ghost btn-sm" onclick="deleteNotif(this)" style="font-size:11px;padding:2px 6px;color:var(--danger);">删除</button>
+                                </div>
+                            </div>
+                            <p style="text-align:center;color:var(--text-secondary);font-size:13px;margin-top:12px;">— 没有更多系统通知了 —</p>
                         </div>
                     </div>
                     <!-- 影评系统 -->
@@ -8312,11 +8705,11 @@
                         <div class="cp-stat-grid">
                             <div class="cp-stat-card" style="text-align:center;">
                                 <div class="cp-stat-label">余额(元)</div>
-                                <div class="cp-stat-value" style="color:var(--primary);">¥0.00</div>
+                                <div class="cp-stat-value" id="walletCashDisplay" style="color:var(--primary);">¥0.00</div>
                             </div>
                             <div class="cp-stat-card" style="text-align:center;">
                                 <div class="cp-stat-label">火眼币</div>
-                                <div class="cp-stat-value" style="color:var(--warning);">0</div>
+                                <div class="cp-stat-value" id="walletCoinDisplay" style="color:var(--warning);">0</div>
                             </div>
                             <div class="cp-stat-card" style="text-align:center;">
                                 <div class="cp-stat-label">优惠券</div>
@@ -8324,14 +8717,15 @@
                             </div>
                             <div class="cp-stat-card" style="text-align:center;">
                                 <div class="cp-stat-label">积分</div>
-                                <div class="cp-stat-value" style="color:var(--success);">0</div>
+                                <div class="cp-stat-value" id="walletPointsDisplay" style="color:var(--success);">0</div>
                             </div>
                         </div>
                         <div style="display:flex;gap:10px;margin-top:16px;">
-                            <button class="btn btn-primary btn-sm" onclick="alert('充值入口')">💰 充值</button>
-                            <button class="btn btn-ghost btn-sm" onclick="alert('消费记录为空')">📄 消费记录</button>
-                            <button class="btn btn-ghost btn-sm" onclick="alert('暂无可兑换项')">🎁 积分兑换</button>
+                            <button class="btn btn-primary btn-sm" onclick="walletRecharge()">💰 充值</button>
+                            <button class="btn btn-ghost btn-sm" onclick="showSpendingHistory()">📄 消费记录</button>
+                            <button class="btn btn-ghost btn-sm" onclick="walletRedeemPoints()">🎁 积分兑换</button>
                         </div>
+                        <div id="spendingHistoryList" style="margin-top:12px;font-size:13px;color:var(--text-secondary);"></div>
                     </div>
 
                     <div class="cp-section">
@@ -8348,6 +8742,63 @@
                             <div class="cp-feature-card">
                                 <div class="cp-fc-title">🌍 全球通道</div>
                                 <p class="cp-fc-desc" id="financeRouteWallet">跨区费用流转已接入统一结算引擎，当前状态：稳定。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 货币转换工具 -->
+                    <div class="cp-section">
+                        <div class="cp-section-title">💱 货币转换工具</div>
+                        <div class="workspace-section-note">快速查看 CNY / HKD / USD / EUR 之间的汇率换算。</div>
+                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;">
+                            <input class="input cp-input" id="currConvAmount" type="number" min="0" step="0.01" value="100" style="width:120px;">
+                            <select class="input cp-input" id="currConvFrom" style="width:100px;">
+                                <option value="CNY">CNY ¥</option>
+                                <option value="HKD">HKD $</option>
+                                <option value="USD">USD $</option>
+                                <option value="EUR">EUR €</option>
+                            </select>
+                            <span style="font-size:18px;color:var(--text-secondary);">→</span>
+                            <select class="input cp-input" id="currConvTo" style="width:100px;">
+                                <option value="HKD">HKD $</option>
+                                <option value="CNY">CNY ¥</option>
+                                <option value="USD">USD $</option>
+                                <option value="EUR">EUR €</option>
+                            </select>
+                            <button class="btn btn-primary btn-sm" onclick="doCurrencyConvert()">换算</button>
+                            <span id="currConvResult" style="font-weight:700;font-size:16px;color:var(--primary);min-width:120px;">--</span>
+                        </div>
+                    </div>
+
+                    <!-- 绑定收款账户 -->
+                    <div class="cp-section">
+                        <div class="cp-section-title">🔗 绑定收款账户（支持全球货币）</div>
+                        <div class="workspace-section-note">绑定收款渠道后才能在平台收到创作收益和付费分成。</div>
+                        <div class="cp-card-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+                            <div class="cp-feature-card">
+                                <div class="cp-fc-title" style="color:var(--success);">💚 微信支付</div>
+                                <input class="input cp-input" id="bindWechat" placeholder="输入微信账号">
+                                <button class="btn btn-success btn-sm" style="margin-top:8px;" onclick="bindPaymentAccount('wechat')">绑定微信</button>
+                                <div class="cp-mini-note" id="bindWechatStatus">未绑定</div>
+                            </div>
+                            <div class="cp-feature-card">
+                                <div class="cp-fc-title" style="color:#1677ff;">💙 支付宝</div>
+                                <input class="input cp-input" id="bindAlipay" placeholder="输入支付宝账号">
+                                <button class="btn btn-info btn-sm" style="margin-top:8px;" onclick="bindPaymentAccount('alipay')">绑定支付宝</button>
+                                <div class="cp-mini-note" id="bindAlipayStatus">未绑定</div>
+                            </div>
+                            <div class="cp-feature-card">
+                                <div class="cp-fc-title" style="color:#003087;">💳 PayPal</div>
+                                <input class="input cp-input" id="bindPaypal" placeholder="输入 PayPal 邮箱">
+                                <button class="btn btn-primary btn-sm" style="margin-top:8px;" onclick="bindPaymentAccount('paypal')">绑定 PayPal</button>
+                                <div class="cp-mini-note" id="bindPaypalStatus">未绑定</div>
+                            </div>
+                            <div class="cp-feature-card">
+                                <div class="cp-fc-title" style="color:var(--warning);">🏦 银行账户（支持全球）</div>
+                                <input class="input cp-input" id="bindBank" placeholder="输入银行账号">
+                                <input class="input cp-input" id="bindBankName" placeholder="银行名称（如：中国银行/HSBC）" style="margin-top:6px;">
+                                <button class="btn btn-warning btn-sm" style="margin-top:8px;" onclick="bindPaymentAccount('bank')">绑定银行</button>
+                                <div class="cp-mini-note" id="bindBankStatus">未绑定</div>
                             </div>
                         </div>
                     </div>
@@ -9208,7 +9659,7 @@
                         <div class="cp-card-grid" style="grid-template-columns:repeat(2,1fr);">
                             <div class="cp-feature-card">
                                 <div class="cp-fc-title">🏷 平台名称</div>
-                                <input class="input cp-input" id="platName" value="火眼金睛 Flame-Eyes">
+                                <input class="input cp-input" id="platName" value="火眼金睛 FlameEyes">
                                 <button class="btn btn-primary btn-sm" style="margin-top:8px;" onclick="savePlatConfig('name')">保存</button>
                             </div>
                             <div class="cp-feature-card">
@@ -9232,7 +9683,7 @@
                             </div>
                             <div class="cp-feature-card">
                                 <div class="cp-fc-title">🏷 官方固定水印（功能125 平台侧）</div>
-                                <input class="input cp-input" id="officialWatermarkText" value="火眼金睛 Flame-Eyes">
+                                <input class="input cp-input" id="officialWatermarkText" value="火眼金睛 FlameEyes">
                                 <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
                                     <button class="btn btn-primary btn-sm" onclick="enablePlatformWatermark(true)">启用官方水印</button>
                                     <button class="btn btn-danger btn-sm" onclick="enablePlatformWatermark(false)">移除官方水印</button>
@@ -9367,6 +9818,7 @@
             <!-- 游戏详情页 -->
             <!-- ============================== -->
             <div class="page-section" id="page-gamedetail">
+                <button class="btn btn-ghost" onclick="switchPage('game')" style="margin-bottom:16px;"><i class="fas fa-arrow-left"></i> 返回游戏区</button>
                 <div class="game-page-shell">
                     <div class="game-page-heading">
                         <div class="game-page-copy">
@@ -9398,6 +9850,7 @@
                                     </div>
                                     <div class="game-detail-title"><span class="game-title-line">把多元神话</span><span class="game-title-line">放进同一张战场</span></div>
                                     <div class="game-detail-sub">TCG 卡牌对战 · 2026年3月12日发布 · 当前版本 v2.6.03</div>
+                                    <div class="game-detail-sub" style="margin-top:4px;"><span style="opacity:0.7;">发布者：</span><strong id="gamePublisherName">神话工作室</strong></div>
                                     <p class="game-hero-summary">《神话宇宙》用一套统一规则把不同神话文明的角色、事件与资源系统拼接成完整对局。前期是身份与节奏判断，中期是阵营经营和资源拉扯，后期会进入高爆发的神祇对抗与命运结算。</p>
 
                                     <div class="game-action-btns">
@@ -9450,7 +9903,7 @@
                                 </div>
                                 <div class="game-info-item">
                                     <div class="gii-icon">📥</div>
-                                    <div><div class="gii-label">累计玩家</div><div class="gii-value">3.8 万+</div></div>
+                                    <div><div class="gii-label">游戏数</div><div class="gii-value">3.8 万+</div></div>
                                 </div>
                             </div>
                         </div>
@@ -9684,6 +10137,49 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- ====== 游戏关卡付费 & 课金功能 ====== -->
+                    <div class="game-section" style="margin-top:24px;">
+                        <div class="game-section-title">💰 关卡付费 & 课金功能</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                            <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.1);">
+                                <div style="font-weight:700;margin-bottom:10px;color:var(--primary);">🎮 游戏关卡付费设置（最低 ¥1）</div>
+                                <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+                                    <div>免费关卡：第 1-2 关</div>
+                                    <div>付费关卡：第 3-10 关</div>
+                                    <div>价格：¥10.00 / 关</div>
+                                </div>
+                                <button class="btn btn-primary btn-sm" style="margin-top:12px;" id="gameLevelUnlockBtn" onclick="purchaseGameItem('levels')">🔓 解锁全部付费关卡</button>
+                                <div class="cp-mini-note" id="gameLevelStatus" style="margin-top:6px;"></div>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.1);">
+                                <div style="font-weight:700;margin-bottom:10px;color:var(--primary);">🛒 课金功能设置（最低 ¥1）</div>
+                                <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+                                    <div id="equipDesc">解锁新装备：¥5.00（无限使用，30天期限）</div>
+                                    <div id="skillDesc">解锁新技能：¥8.00（使用5次，无限期限）</div>
+                                    <div id="vipDesc">解锁VIP权限：¥15.00（无限使用，无限期限）</div>
+                                </div>
+                                <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+                                    <button class="btn btn-ghost btn-sm" id="gameEquipBtn" onclick="purchaseGameItem('equip')">⚔️ 购买装备</button>
+                                    <button class="btn btn-ghost btn-sm" id="gameSkillBtn" onclick="purchaseGameItem('skill')">✨ 购买技能</button>
+                                    <button class="btn btn-primary btn-sm" id="gameVipBtn" onclick="purchaseGameItem('vip')">👑 开通VIP</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ====== 游戏对话区 ====== -->
+                    <div class="game-section game-chat-panel">
+                        <div class="game-section-title">💬 游戏对话</div>
+                        <div class="game-chat-box" id="gameChatBox">
+                            <div class="game-chat-msg is-system">系统：欢迎来到神话宇宙对话频道，可以和其他玩家交流战术！</div>
+                        </div>
+                        <div class="game-chat-input-row">
+                            <input type="text" class="game-chat-input" id="gameChatInput" placeholder="输入消息…" onkeydown="if(event.key==='Enter')sendGameChat()">
+                            <button class="btn btn-ghost game-chat-voice-btn" id="gameChatVoiceBtn" onclick="startGameVoiceInput()">🎤 录音转文字</button>
+                            <button class="btn btn-primary game-chat-send-btn" onclick="sendGameChat()">发送</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -9821,74 +10317,85 @@
 
             <!-- 通用分区页面（电影/剧集/短剧/视频/游戏/小说/漫画/直播/动态） -->
             <div class="page-section" id="page-category">
-                <div class="category-page-hero">
-                    <div class="category-hero-main">
+                <!-- 顶部：标题 + 分类标签 + 视图切换 -->
+                <div class="category-topbar">
+                    <div class="category-topbar-left">
                         <div class="category-kicker" id="categoryKicker"></div>
                         <div class="category-title-row">
                             <div class="category-title-wrap">
                                 <h2 id="categoryTitle"></h2>
-                                <div class="category-desc" id="categoryDesc"></div>
                             </div>
-                            <div class="category-badge" id="categoryBadge"></div>
                         </div>
-                        <div class="category-stat-strip" id="categoryStats"></div>
                         <div class="category-tabs" id="categoryTabs"></div>
-                        <div class="category-action-strip" id="categoryActionStrip"></div>
                     </div>
-                    <div class="category-focus-panel">
-                        <div class="section-eyebrow" id="categoryFocusEyebrow">今日焦点</div>
-                        <div id="categoryFocus"></div>
-                    </div>
-                </div>
-
-                <div class="category-overview-grid">
-                    <div class="category-section">
-                        <div class="category-section-head">
-                            <h3 id="categoryFeatureTitle">编辑精选</h3>
-                            <span class="category-section-sub" id="categoryFeatureSub"></span>
-                        </div>
-                        <div class="category-feature-grid" id="categoryFeatureGrid"></div>
-                    </div>
-                    <div class="category-side-stack">
-                        <div class="category-rank-card">
-                            <div class="category-section-head">
-                                <h3 id="categoryRankTitle">频道热榜</h3>
-                                <span class="category-section-sub" id="categoryRankSub">实时更新</span>
-                            </div>
-                            <div class="category-rank-list" id="categoryRankList"></div>
-                        </div>
-                        <div class="category-schedule-card">
-                            <div class="category-section-head">
-                                <h3 id="categoryScheduleTitle">排播与上新</h3>
-                                <span class="category-section-sub" id="categoryScheduleSub">未来 7 天</span>
-                            </div>
-                            <div class="category-schedule-list" id="categorySchedule"></div>
-                        </div>
+                    <div class="category-topbar-right">
+                        <button class="btn btn-ghost category-view-toggle" id="categoryViewToggle" onclick="toggleCategoryView()">
+                            <i class="fas fa-chart-bar"></i> <span id="categoryViewToggleText">数据总览</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="category-section" style="margin-bottom:22px;">
-                    <div class="category-section-head">
-                        <h3 id="categoryCreatorTitle">重点创作者</h3>
-                        <span class="category-section-sub" id="categoryCreatorSub"></span>
-                    </div>
-                    <div class="category-creator-grid" id="categoryCreatorGrid"></div>
-                </div>
-
-                <div class="category-section category-grid-section">
-                    <div class="category-section-head">
-                        <h3 id="categoryLatestTitle">最新更新</h3>
-                        <span class="category-section-sub" id="categoryLatestSub">可直接进入播放页或详情页</span>
-                    </div>
+                <!-- 默认视图：作品卡片网格 -->
+                <div class="category-cards-view" id="categoryCardsView">
                     <div class="category-grid-note" id="categoryGridNote"></div>
                     <div class="video-grid" id="categoryGrid"></div>
+                </div>
+
+                <!-- 数据视图（默认隐藏） -->
+                <div class="category-data-view" id="categoryDataView" style="display:none;">
+                    <div class="category-page-hero">
+                        <div class="category-hero-main">
+                            <div class="category-desc" id="categoryDesc"></div>
+                            <div class="category-badge" id="categoryBadge"></div>
+                            <div class="category-stat-strip" id="categoryStats"></div>
+                            <div class="category-action-strip" id="categoryActionStrip"></div>
+                        </div>
+                        <div class="category-focus-panel">
+                            <div class="section-eyebrow" id="categoryFocusEyebrow">今日焦点</div>
+                            <div id="categoryFocus"></div>
+                        </div>
+                    </div>
+
+                    <div class="category-overview-grid">
+                        <div class="category-section">
+                            <div class="category-section-head">
+                                <h3 id="categoryFeatureTitle">编辑精选</h3>
+                                <span class="category-section-sub" id="categoryFeatureSub"></span>
+                            </div>
+                            <div class="category-feature-grid" id="categoryFeatureGrid"></div>
+                        </div>
+                        <div class="category-side-stack">
+                            <div class="category-rank-card">
+                                <div class="category-section-head">
+                                    <h3 id="categoryRankTitle">频道热榜</h3>
+                                    <span class="category-section-sub" id="categoryRankSub">实时更新</span>
+                                </div>
+                                <div class="category-rank-list" id="categoryRankList"></div>
+                            </div>
+                            <div class="category-schedule-card">
+                                <div class="category-section-head">
+                                    <h3 id="categoryScheduleTitle">排播与上新</h3>
+                                    <span class="category-section-sub" id="categoryScheduleSub">未来 7 天</span>
+                                </div>
+                                <div class="category-schedule-list" id="categorySchedule"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-section" style="margin-bottom:22px;">
+                        <div class="category-section-head">
+                            <h3 id="categoryCreatorTitle">重点创作者</h3>
+                            <span class="category-section-sub" id="categoryCreatorSub"></span>
+                        </div>
+                        <div class="category-creator-grid" id="categoryCreatorGrid"></div>
+                    </div>
                 </div>
             </div>
 
             <div class="page-section" id="page-contentdetail">
                 <button class="btn btn-ghost" onclick="goBackFromContentDetail()" style="margin-bottom:16px;"><i class="fas fa-arrow-left"></i> 返回频道</button>
                 <div class="detail-hero-card">
-                    <div class="official-watermark-badge" id="officialDetailWatermark">火眼金睛 Flame-Eyes</div>
+                    <div class="official-watermark-badge" id="officialDetailWatermark">火眼金睛 FlameEyes</div>
                     <div class="detail-kicker" id="contentDetailKicker"></div>
                     <div class="detail-title" id="contentDetailTitle"></div>
                     <div class="detail-subtitle" id="contentDetailSubtitle"></div>
@@ -9973,7 +10480,7 @@
 
     <!-- 页脚 -->
     <footer class="footer">
-        <p>&copy; 2026 火眼金睛 Flame-Eyes Gold Pupils. 保留所有权利</p>
+        <p>&copy; 2026 火眼金睛 FlameEyes GoldPupils. 保留所有权利</p>
         <p style="margin-top:6px;">合作邮箱：<a href="mailto:deadly9deadly@gmail.com">deadly9deadly@gmail.com</a> | 客服：24小时AI自动回复</p>
     </footer>
 
@@ -10302,7 +10809,7 @@
         if (!settings.platformOfficialWatermark) {
             FE.setSetting('platformOfficialWatermark', {
                 enabled: true,
-                text: '火眼金睛 Flame-Eyes'
+                text: '火眼金睛 FlameEyes'
             });
         }
 
@@ -10390,7 +10897,7 @@
         movie: '#C70039', series: '#1D4ED8', short: '#059669', video: '#7C3AED',
         game: '#EA580C', novel: '#B45309', comic: '#DB2777', live: '#DC2626', music: '#7C2D12', post: '#0891B2'
     };
-    const searchableCategoryTypes = ['movie', 'series', 'short', 'video', 'novel', 'comic', 'live', 'music', 'post'];
+    const searchableCategoryTypes = ['movie', 'series', 'short', 'video', 'game', 'novel', 'comic', 'live', 'music', 'post'];
     const contentDetailTypes = { novel: true, comic: true, post: true };
     const categoryActionConfigs = {
         movie: [
@@ -10679,7 +11186,7 @@
     }
 
     function artworkHash(value) {
-        var input = String(value || 'flame-eyes');
+        var input = String(value || 'FlameEyes');
         var hash = 0;
         for (var i = 0; i < input.length; i++) {
             hash = ((hash << 5) - hash + input.charCodeAt(i)) | 0;
@@ -10801,13 +11308,15 @@
 
     function normalizeCategoryItems(type, items) {
         return (items || []).map(function(item, index) {
-            return {
+            var normalized = {
                 title: formalizeDisplayCopy(item.title),
                 author: formalizeDisplayCopy(item.author),
                 views: item.views,
                 dur: formalizeDisplayCopy(item.dur),
                 img: resolveArtworkUrl(item.img, type, item.title, item.author + ' · ' + item.dur, 'grid-' + index, 'grid')
             };
+            if (item.isPlayable) normalized.isPlayable = true;
+            return normalized;
         });
     }
 
@@ -11157,7 +11666,8 @@
         document.getElementById('categoryFocusEyebrow').textContent = translateIfNeeded(activeTab === defaultTab ? (preset.focusEyebrow || '今日焦点') : (activeTab + ' 焦点'));
         document.getElementById('categoryFeatureTitle').textContent = translateIfNeeded(activeTab === defaultTab ? (pageCopy.featureTitle || '编辑精选') : (activeTab + '精选'));
         document.getElementById('categoryFeatureSub').textContent = translateIfNeeded(activeTab === defaultTab ? (pageCopy.featureSub || '人工甄选 · 品质保证') : ('当前筛选 · ' + activeTab));
-        document.getElementById('categoryLatestSub').textContent = translateIfNeeded(activeTab === defaultTab ? (preset.latestSub || '可直接进入播放页或详情页') : ('当前筛选：' + activeTab));
+        var elLatestSub = document.getElementById('categoryLatestSub');
+        if (elLatestSub) elLatestSub.textContent = translateIfNeeded(activeTab === defaultTab ? (preset.latestSub || '可直接进入播放页或详情页') : ('当前筛选：' + activeTab));
         document.getElementById('categoryGridNote').textContent = translateIfNeeded(activeTab === defaultTab
             ? (pageCopy.gridNote || ('以下为' + (categoryNames[type] || type) + '频道最新更新内容，点击卡片即可进入播放/阅读页面'))
             : ('当前展示“' + activeTab + '”相关内容，点击卡片即可继续浏览。'));
@@ -11192,7 +11702,7 @@
             document.getElementById('page-contentdetail').classList.add('active');
         } else if (page === 'platform') {
             document.getElementById('page-platform').classList.add('active');
-        } else if (page === 'game' || page === 'gamedetail') {
+        } else if (page === 'gamedetail') {
             document.getElementById('page-gamedetail').classList.add('active');
         } else if (page === 'cardgame' || page === 'playgame') {
             document.getElementById('page-cardgame').classList.add('active');
@@ -11211,7 +11721,41 @@
         if (page === 'platform') refreshDigitalHumanUI();
     }
 
+    /* ── 视图切换：作品卡片 ⇄ 数据总览 ── */
+    var categoryViewMode = 'cards'; // 'cards' | 'data'
+    function toggleCategoryView() {
+        var cardsView = document.getElementById('categoryCardsView');
+        var dataView  = document.getElementById('categoryDataView');
+        var toggleBtn = document.getElementById('categoryViewToggle');
+        var toggleText = document.getElementById('categoryViewToggleText');
+        if (categoryViewMode === 'cards') {
+            categoryViewMode = 'data';
+            cardsView.style.display = 'none';
+            dataView.style.display = '';
+            toggleBtn.classList.add('is-active');
+            toggleText.textContent = translateIfNeeded('返回作品');
+            toggleBtn.querySelector('i').className = 'fas fa-th-large';
+        } else {
+            categoryViewMode = 'cards';
+            cardsView.style.display = '';
+            dataView.style.display = 'none';
+            toggleBtn.classList.remove('is-active');
+            toggleText.textContent = translateIfNeeded('数据总览');
+            toggleBtn.querySelector('i').className = 'fas fa-chart-bar';
+        }
+    }
+
     function generateCategoryContent(type) {
+        /* 切换到默认卡片视图 */
+        categoryViewMode = 'cards';
+        var cardsView = document.getElementById('categoryCardsView');
+        var dataView  = document.getElementById('categoryDataView');
+        var toggleBtn = document.getElementById('categoryViewToggle');
+        var toggleText = document.getElementById('categoryViewToggleText');
+        if (cardsView) cardsView.style.display = '';
+        if (dataView) dataView.style.display = 'none';
+        if (toggleBtn) toggleBtn.classList.remove('is-active');
+        if (toggleText) toggleText.textContent = translateIfNeeded('数据总览');
         var name = categoryNames[type] || type;
         var color = categoryColors[type] || '#E63946';
         var pageCopy = normalizeCopyRecord(categorySectionCopy[type] || {});
@@ -11720,6 +12264,7 @@
                 {title:'开箱全网最贵耳机', author:'数码测评', views:'520万', dur:'14:40', img:'https://picsum.photos/seed/vid12/400/225'}
             ],
             game: [
+                {title:'神话宇宙 TCG卡牌对战', author:'神话工作室', views:'623万', dur:'在线游玩', img:'游戏封面.jpg', isPlayable:true},
                 {title:'艾尔登法环DLC全攻略', author:'游戏大神', views:'1680万', dur:'58:30', img:'https://picsum.photos/seed/game1/400/225'},
                 {title:'GTA6实机演示深度解析', author:'游戏资讯', views:'3200万', dur:'25:18', img:'https://picsum.photos/seed/game2/400/225'},
                 {title:'原神5.0须弥全收集', author:'米游社', views:'920万', dur:'42:42', img:'https://picsum.photos/seed/game3/400/225'},
@@ -11925,7 +12470,31 @@
 
     function openCategoryItem(type, index) {
         if (type === 'game') {
-            switchPage('game');
+            /* 找到当前渲染的实际item（可能被tab过滤过） */
+            var gameGrid = document.querySelectorAll('#categoryGrid .video-card');
+            var clickedTitle = '';
+            if (gameGrid[index]) {
+                var titleEl = gameGrid[index].querySelector('.video-title');
+                if (titleEl) clickedTitle = titleEl.textContent;
+            }
+            /* 检查是否是可玩游戏（神话宇宙） */
+            var gameCache = categoryCache[type];
+            if (gameCache && gameCache.items) {
+                for (var gi = 0; gi < gameCache.items.length; gi++) {
+                    if (gameCache.items[gi].isPlayable && gameCache.items[gi].title === clickedTitle) {
+                        switchPage('gamedetail');
+                        return;
+                    }
+                }
+            }
+            /* 其他游戏内容 → 播放器 */
+            if (gameCache && gameCache.items) {
+                var foundItem = null;
+                for (var gj = 0; gj < gameCache.items.length; gj++) {
+                    if (gameCache.items[gj].title === clickedTitle) { foundItem = gameCache.items[gj]; break; }
+                }
+                if (foundItem) { openPlayer(foundItem.title, foundItem.author, foundItem.views, buildPublishDate(index)); return; }
+            }
             return;
         }
 
@@ -12001,6 +12570,285 @@
             '图文内容单独使用详情页展示，便于集中查看观点摘要与社区互动信息。',
             '这样可以保持动态频道的浏览路径简洁清晰。'
         ].map(translateIfNeeded);
+    }
+
+    /* ── 动态帖 免费/付费内容分割体 ── */
+    function buildPostFreePayBody(item) {
+        var freeText = currentLang === 'en'
+            ? '"' + translateIfNeeded(item.title) + '" by ' + translateIfNeeded(item.author) + '  —  This is the free portion of the post visible to all users. It describes the topic, shares preview thoughts, and invites readers to unlock the full content below.'
+            : '《' + item.title + '》由 ' + item.author + ' 发布 —— 这是所有用户均可免费查看的部分。作者在此简要介绍话题、分享观点摘要，并邀请读者解锁下方完整付费内容。';
+        var paidText = currentLang === 'en'
+            ? 'This is the paid portion of the post. It contains the full analysis, exclusive opinion, behind-the-scenes details, and downloadable resources. Unlock now for just ¥1.00.'
+            : '这是该动态帖的付费部分。包含完整分析、独家观点、幕后细节与可下载资源。仅需 ¥1.00 即可解锁查看全文。';
+        var btnText = currentLang === 'en' ? '💰 Pay ¥1.00 to Unlock Full Post' : '💰 支付 ¥1.00 查看完整动态帖';
+        return '<div class="post-free-part">' + translateIfNeeded(freeText) + '</div>' +
+            '<hr class="post-divider-line">' +
+            '<div class="post-paid-part" id="postPaidContent">' + translateIfNeeded(paidText) + '</div>' +
+            '<button class="post-pay-btn" onclick="unlockPostContent()">' + btnText + '</button>';
+    }
+
+    function unlockPostContent() {
+        var el = document.getElementById('postPaidContent');
+        if (el) {
+            el.classList.add('unlocked');
+            walletSpend(2, '动态帖付费解锁');
+            showPopupNotice('searchNotice', currentLang === 'en' ? 'Payment successful! Full post unlocked.' : '支付成功！已解锁完整动态帖内容。扣费 ¥2.00', false);
+        }
+    }
+
+    // ====================================================================
+    //  通知子标签切换（私信/回复/@/系统）
+    // ====================================================================
+    function switchNotifTab(tab) {
+        var tabs = ['dm', 'reply', 'at', 'system'];
+        var btnMap = { dm: 'notifTabDM', reply: 'notifTabReply', at: 'notifTabAt', system: 'notifTabSystem' };
+        var panelMap = { dm: 'notifDM', reply: 'notifReply', at: 'notifAt', system: 'notifSystem' };
+        for (var i = 0; i < tabs.length; i++) {
+            var t = tabs[i];
+            var btn = document.getElementById(btnMap[t]);
+            var panel = document.getElementById(panelMap[t]);
+            if (btn) { btn.className = t === tab ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm'; }
+            if (panel) { panel.style.display = t === tab ? '' : 'none'; }
+        }
+    }
+
+    function markNotifRead(btn) {
+        var card = btn.closest('.notif-card');
+        if (!card) return;
+        var title = card.querySelector('div[style*="font-weight:600"]');
+        if (title) title.textContent = title.textContent.replace('🔴 ', '');
+        card.style.opacity = '0.6';
+        btn.textContent = '✅';
+        btn.disabled = true;
+    }
+    function deleteNotif(btn) {
+        var card = btn.closest('.notif-card');
+        if (card) { card.style.transition = 'all 0.3s'; card.style.maxHeight = '0'; card.style.opacity = '0'; card.style.overflow = 'hidden'; card.style.padding = '0'; card.style.marginBottom = '0'; setTimeout(function() { card.remove(); }, 300); }
+    }
+    function markAllNotifRead(btn) {
+        var panel = btn.closest('.notif-panel');
+        if (!panel) return;
+        panel.querySelectorAll('.notif-card').forEach(function(card) {
+            var title = card.querySelector('div[style*="font-weight:600"]');
+            if (title) title.textContent = title.textContent.replace('🔴 ', '');
+            card.style.opacity = '0.6';
+            var rdBtn = card.querySelector('button');
+            if (rdBtn && rdBtn.textContent.trim() === '已读') { rdBtn.textContent = '✅'; rdBtn.disabled = true; }
+        });
+        btn.textContent = '✅ 已全部标记';
+        btn.disabled = true;
+    }
+
+    // ====================================================================
+    //  收款账户绑定
+    // ====================================================================
+    function bindPaymentAccount(type) {
+        var inputMap = { wechat: 'bindWechat', alipay: 'bindAlipay', paypal: 'bindPaypal', bank: 'bindBank' };
+        var labelMap = { wechat: '微信支付', alipay: '支付宝', paypal: 'PayPal', bank: '银行卡' };
+        var el = document.getElementById(inputMap[type]);
+        if (!el) return;
+        var val = el.value.trim();
+        if (!val) {
+            alert(currentLang === 'en' ? 'Please enter your ' + type + ' account' : '请输入' + (labelMap[type] || type) + '账号');
+            return;
+        }
+        if (!contentModeration(val)) {
+            alert(currentLang === 'en' ? 'Content contains prohibited keywords' : '内容包含违规关键词，已拦截');
+            return;
+        }
+        var bindings = JSON.parse(localStorage.getItem('fe_payment_bindings') || '{}');
+        bindings[type] = val;
+        localStorage.setItem('fe_payment_bindings', JSON.stringify(bindings));
+        refreshPaymentBindingStatus();
+        alert(currentLang === 'en' ? labelMap[type] + ' account bound successfully!' : (labelMap[type] || type) + ' 账号绑定成功！');
+    }
+
+    function refreshPaymentBindingStatus() {
+        var bindings = JSON.parse(localStorage.getItem('fe_payment_bindings') || '{}');
+        var statusMap = { wechat: 'bindWechatStatus', alipay: 'bindAlipayStatus', paypal: 'bindPaypalStatus', bank: 'bindBankStatus' };
+        var inputMap = { wechat: 'bindWechat', alipay: 'bindAlipay', paypal: 'bindPaypal', bank: 'bindBank' };
+        var types = ['wechat', 'alipay', 'paypal', 'bank'];
+        for (var i = 0; i < types.length; i++) {
+            var t = types[i];
+            var statusEl = document.getElementById(statusMap[t]);
+            var inputEl = document.getElementById(inputMap[t]);
+            if (bindings[t]) {
+                if (statusEl) { statusEl.textContent = '✅ 已绑定：' + bindings[t].replace(/(.{3}).*(.{2})/, '$1***$2'); statusEl.style.color = 'var(--success)'; }
+                if (inputEl) inputEl.value = bindings[t];
+            } else {
+                if (statusEl) { statusEl.textContent = '未绑定'; statusEl.style.color = ''; }
+            }
+        }
+    }
+
+    // ====================================================================
+    //  货币转换 UI
+    // ====================================================================
+    function doCurrencyConvert() {
+        var amount = parseFloat(document.getElementById('currConvAmount').value) || 0;
+        var from = document.getElementById('currConvFrom').value;
+        var to = document.getElementById('currConvTo').value;
+        var result = currencyConvert(amount, from, to);
+        var symbols = { CNY: '¥', HKD: 'HK$', USD: '$', EUR: '€' };
+        document.getElementById('currConvResult').textContent = (symbols[to] || '') + result.toFixed(2) + ' ' + to;
+    }
+
+    // ====================================================================
+    //  游戏课金购买（localStorage 持久化）
+    // ====================================================================
+    function purchaseGameItem(item) {
+        var purchases = JSON.parse(localStorage.getItem('fe_game_purchases') || '{}');
+        var prices = { levels: 80, equip: 5, skill: 8, vip: 15 };
+        var msgs = {
+            levels: { zh: '已解锁第 3-10 关！扣费 ¥80.00', en: 'Level 3-10 unlocked! ¥80 charged.' },
+            equip: { zh: '已解锁新装备！扣费 ¥5.00（30天期限）', en: 'Equipment unlocked! ¥5 charged (30d).' },
+            skill: { zh: '已解锁新技能！扣费 ¥8.00（使用5次）', en: 'Skill unlocked! ¥8 charged (5 uses).' },
+            vip: { zh: '已解锁VIP权限！扣费 ¥15.00（无限）', en: 'VIP unlocked! ¥15 charged (unlimited).' }
+        };
+        if (purchases[item]) {
+            alert(currentLang === 'en' ? 'Already purchased!' : '该项目已购买，无需重复购买！');
+            return;
+        }
+        var w = getWallet();
+        var price = prices[item] || 0;
+        if (w.cash < price) {
+            alert(currentLang === 'en' ? 'Insufficient balance! Need ¥' + price : '余额不足！需要 ¥' + price + '，当前余额 ¥' + w.cash.toFixed(2));
+            return;
+        }
+        purchases[item] = { time: new Date().toISOString() };
+        localStorage.setItem('fe_game_purchases', JSON.stringify(purchases));
+        walletSpend(price, '游戏课金：' + item);
+        var msg = msgs[item] || {};
+        alert(currentLang === 'en' ? msg.en : msg.zh);
+        refreshGamePurchaseUI();
+    }
+
+    function refreshGamePurchaseUI() {
+        var purchases = JSON.parse(localStorage.getItem('fe_game_purchases') || '{}');
+        var btnMap = { levels: 'gameLevelUnlockBtn', equip: 'gameEquipBtn', skill: 'gameSkillBtn', vip: 'gameVipBtn' };
+        var items = ['levels', 'equip', 'skill', 'vip'];
+        for (var i = 0; i < items.length; i++) {
+            var key = items[i];
+            var btn = document.getElementById(btnMap[key]);
+            if (btn && purchases[key]) {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                btn.textContent = '✅ 已购买';
+            }
+        }
+        var statusEl = document.getElementById('gameLevelStatus');
+        if (statusEl && purchases.levels) statusEl.textContent = '✅ 付费关卡已全部解锁';
+    }
+
+    // ====================================================================
+    //  钱包余额系统（localStorage 持久化）
+    // ====================================================================
+    function getWallet() {
+        return JSON.parse(localStorage.getItem('fe_wallet') || '{"cash":2840,"coins":500,"points":1200,"history":[]}');
+    }
+    function saveWallet(w) { localStorage.setItem('fe_wallet', JSON.stringify(w)); }
+    function refreshWalletUI() {
+        var w = getWallet();
+        var cashEl = document.getElementById('walletCashDisplay');
+        var coinEl = document.getElementById('walletCoinDisplay');
+        var ptEl = document.getElementById('walletPointsDisplay');
+        var balEl = document.getElementById('walletBalanceDisplay');
+        if (cashEl) cashEl.textContent = '¥' + w.cash.toFixed(2);
+        if (coinEl) coinEl.textContent = w.coins;
+        if (ptEl) ptEl.textContent = w.points;
+        if (balEl) balEl.textContent = '¥' + w.cash.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+    function walletRecharge() {
+        var amt = prompt(currentLang === 'en' ? 'Enter recharge amount (CNY):' : '请输入充值金额（元）：', '100');
+        if (!amt || isNaN(parseFloat(amt)) || parseFloat(amt) <= 0) return;
+        var val = parseFloat(amt);
+        var w = getWallet();
+        w.cash += val;
+        w.coins += Math.floor(val);
+        w.points += Math.floor(val * 2);
+        w.history.unshift({ type: 'recharge', amount: val, time: new Date().toLocaleString(), desc: '充值 ¥' + val.toFixed(2) });
+        saveWallet(w);
+        refreshWalletUI();
+        alert(currentLang === 'en' ? 'Recharged ¥' + val.toFixed(2) + ' successfully! +' + Math.floor(val) + ' coins +' + Math.floor(val * 2) + ' points' : '充值 ¥' + val.toFixed(2) + ' 成功！赠送 ' + Math.floor(val) + ' 火眼币 + ' + Math.floor(val * 2) + ' 积分');
+    }
+    function walletSpend(amount, desc) {
+        var w = getWallet();
+        w.cash = Math.max(0, w.cash - amount);
+        w.history.unshift({ type: 'spend', amount: -amount, time: new Date().toLocaleString(), desc: desc });
+        saveWallet(w);
+        refreshWalletUI();
+    }
+    function showSpendingHistory() {
+        var w = getWallet();
+        var el = document.getElementById('spendingHistoryList');
+        if (!el) return;
+        if (!w.history.length) { el.innerHTML = '<p style="color:var(--text-muted);">暂无消费记录</p>'; return; }
+        var h = '<div style="max-height:200px;overflow-y:auto;">';
+        for (var i = 0; i < Math.min(w.history.length, 20); i++) {
+            var r = w.history[i];
+            var color = r.type === 'recharge' ? 'var(--success)' : 'var(--danger)';
+            h += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);">';
+            h += '<span>' + r.desc + '</span>';
+            h += '<span style="color:' + color + ';">' + (r.amount > 0 ? '+' : '') + '¥' + Math.abs(r.amount).toFixed(2) + '</span>';
+            h += '<span style="font-size:11px;color:var(--text-muted);">' + r.time + '</span></div>';
+        }
+        h += '</div>';
+        el.innerHTML = el.innerHTML ? '' : h;
+    }
+    function walletRedeemPoints() {
+        var w = getWallet();
+        if (w.points < 100) { alert(currentLang === 'en' ? 'Need at least 100 points to redeem.' : '积分不足100，暂无法兑换。'); return; }
+        var redeemed = Math.floor(w.points / 100);
+        w.cash += redeemed;
+        w.points = w.points % 100;
+        w.history.unshift({ type: 'recharge', amount: redeemed, time: new Date().toLocaleString(), desc: '积分兑换 ¥' + redeemed });
+        saveWallet(w);
+        refreshWalletUI();
+        alert(currentLang === 'en' ? 'Redeemed ' + redeemed + ' CNY from points!' : '兑换成功！' + redeemed + ' 积分 → ¥' + redeemed);
+    }
+
+    // ====================================================================
+    //  头像编辑：美颜 / 特效滤镜
+    // ====================================================================
+    function editAvatarBeauty() {
+        var avatar = document.querySelector('.profile-pic');
+        if (avatar) {
+            avatar.style.filter = 'brightness(1.15) contrast(1.05) saturate(1.2)';
+            avatar.style.transition = 'filter 0.5s';
+        }
+        showPopupNotice('searchNotice', currentLang === 'en' ? '✨ AI Beauty enhancement applied to avatar!' : '✨ AI 美颜效果已应用到头像！', false);
+    }
+    function editAvatarEffect() {
+        var avatar = document.querySelector('.profile-pic');
+        if (avatar) {
+            var effects = ['hue-rotate(30deg)', 'hue-rotate(180deg) saturate(1.5)', 'sepia(0.4) saturate(1.8)', 'grayscale(0.3) contrast(1.3)'];
+            var current = avatar.getAttribute('data-effect-idx') || '0';
+            var idx = (parseInt(current) + 1) % effects.length;
+            avatar.style.filter = effects[idx];
+            avatar.style.transition = 'filter 0.5s';
+            avatar.setAttribute('data-effect-idx', String(idx));
+        }
+        showPopupNotice('searchNotice', currentLang === 'en' ? '🐾 Special effect filter applied! Click again to cycle effects.' : '🐾 特效滤镜已切换！再次点击可循环更换效果。', false);
+    }
+
+    // ====================================================================
+    //  AI 内容审核（禁止反华、辱华等内容）
+    // ====================================================================
+    function contentModeration(content) {
+        var forbiddenKeywords = ['反中国', '反政府', '辱华', '反汉族', '台独', '港独'];
+        for (var i = 0; i < forbiddenKeywords.length; i++) {
+            if (content.indexOf(forbiddenKeywords[i]) !== -1) return false;
+        }
+        return true;
+    }
+
+    // ====================================================================
+    //  货币转换（CNY / HKD / USD / EUR）
+    // ====================================================================
+    function currencyConvert(amount, fromCurrency, toCurrency) {
+        var rates = { CNY: 1, HKD: 1.1, USD: 0.14, EUR: 0.13 };
+        if (!rates[fromCurrency] || !rates[toCurrency]) return amount;
+        return (amount / rates[fromCurrency]) * rates[toCurrency];
     }
 
     function buildContentDetailSideItems(type, item, index) {
@@ -12103,9 +12951,13 @@
         document.getElementById('contentDetailActions').innerHTML =
             '<button class="btn btn-primary" onclick="handlePrimaryContentAction()">' + translateIfNeeded(copy.primary) + '</button>' +
             '<button class="btn btn-ghost" onclick="handleSecondaryContentAction()">' + translateIfNeeded(copy.secondary) + '</button>';
-        document.getElementById('contentDetailBody').innerHTML = buildContentDetailBody(type, item).map(function(text) {
-            return '<div class="detail-paragraph">' + text + '</div>';
-        }).join('');
+        if (type === 'post') {
+            document.getElementById('contentDetailBody').innerHTML = buildPostFreePayBody(item);
+        } else {
+            document.getElementById('contentDetailBody').innerHTML = buildContentDetailBody(type, item).map(function(text) {
+                return '<div class="detail-paragraph">' + text + '</div>';
+            }).join('');
+        }
         document.getElementById('contentDetailSideList').innerHTML = buildContentDetailSideItems(type, item, index).map(function(text) {
             return '<div class="detail-side-item">' + text + '</div>';
         }).join('');
@@ -12171,9 +13023,23 @@
         document.getElementById('playerTitle').textContent = _translateRuntimeText(title, currentLang, runtimeMap);
         document.getElementById('playerViews').textContent = _translateRuntimeText(views, currentLang, runtimeMap);
         document.getElementById('playerDate').textContent = _translateRuntimeText(date, currentLang, runtimeMap);
+        saveWatchHistory(title, author);
         switchPage('player');
         refreshPlayerAssistUI();
         refreshPlatformWatermarkUI();
+    }
+
+    // ====================================================================
+    //  观看记录保存（localStorage）
+    // ====================================================================
+    function saveWatchHistory(title, author) {
+        var history = JSON.parse(localStorage.getItem('fe_watch_history') || '[]');
+        var entry = { title: title, author: author, timestamp: new Date().toISOString() };
+        // 去重：如果已有同名条目，先删除旧的
+        history = history.filter(function(h) { return h.title !== title; });
+        history.unshift(entry);
+        if (history.length > 200) history = history.slice(0, 200);
+        localStorage.setItem('fe_watch_history', JSON.stringify(history));
     }
 
     function formatPlayerTime(seconds) {
@@ -12273,6 +13139,31 @@
         else if (shell.msRequestFullscreen) shell.msRequestFullscreen();
     }
 
+    /* 音量 0-1000 */
+    function setPlayerVolume(val) {
+        val = Math.max(0, Math.min(1000, parseInt(val) || 0));
+        var slider = document.getElementById('playerVolumeSlider');
+        var label = document.getElementById('playerVolumeValue');
+        var video = document.getElementById('videoElement');
+        if (slider) slider.value = val;
+        if (label) label.textContent = val;
+        if (video) video.volume = Math.min(val / 100, 1);
+        var st = document.getElementById('playerVolumeStatus');
+        if (st) st.textContent = '当前音量：' + val + (val > 100 ? '（增益放大）' : val === 0 ? '（静音）' : '');
+    }
+
+    /* 画面镜像 */
+    var playerMirrored = false;
+    function togglePlayerMirror() {
+        playerMirrored = !playerMirrored;
+        var video = document.getElementById('videoElement');
+        var btn = document.getElementById('playerMirrorBtn');
+        var st = document.getElementById('playerMirrorStatus');
+        if (video) video.style.transform = playerMirrored ? 'scaleX(-1)' : '';
+        if (btn) btn.textContent = playerMirrored ? '恢复画面' : '开启镜像';
+        if (st) st.textContent = playerMirrored ? '当前：画面已水平翻转。' : '当前：正常画面。';
+    }
+
     function snapPlayerToLockedRange() {
         var video = document.getElementById('videoElement');
         var assist = FE.getSettings().playerAssist || {};
@@ -12307,6 +13198,10 @@
     function postComment() {
         var text = document.getElementById('commentInput').value.trim();
         if (!text) return;
+        if (!contentModeration(text)) {
+            alert(currentLang === 'en' ? 'Your comment contains prohibited content and was blocked.' : '评论包含违规内容，已被拦截。');
+            return;
+        }
         var name = currentUser ? currentUser.username : (currentLang === 'en' ? 'Guest' : '游客');
         var replyText = currentLang === 'en' ? 'Reply' : '回复';
         var copyText = currentLang === 'en' ? 'Copy' : '复制';
@@ -12314,10 +13209,48 @@
             '<div class="comment-avatar">' + name[0] + '</div>' +
             '<div class="comment-content"><div class="comment-author">' + name + '</div>' +
             '<div class="comment-text">' + filterSensitive(text) + '</div>' +
-            '<div class="comment-actions"><span>👍 0</span> <span>💬 ' + replyText + '</span> <span>📋 ' + copyText + '</span></div></div></div>';
+            '<div class="comment-actions"><span onclick="toggleCommentLike(this)" style="cursor:pointer">👍 0</span> <span onclick="replyToComment(this)" style="cursor:pointer">💬 ' + replyText + '</span> <span onclick="copyCommentText(this)" style="cursor:pointer">📋 ' + copyText + '</span></div></div></div>';
         document.getElementById('commentList').insertAdjacentHTML('afterbegin', html);
         document.getElementById('commentInput').value = '';
         refreshDynamicI18n();
+    }
+
+    // ====================================================================
+    //  评论交互：点赞 / 回复 / 复制
+    // ====================================================================
+    function toggleCommentLike(el) {
+        var liked = el.getAttribute('data-liked') === '1';
+        var m = el.textContent.match(/\d+/);
+        var count = m ? parseInt(m[0]) : 0;
+        if (liked) {
+            count = Math.max(0, count - 1);
+            el.setAttribute('data-liked', '0');
+            el.style.color = '';
+        } else {
+            count += 1;
+            el.setAttribute('data-liked', '1');
+            el.style.color = '#e74c3c';
+        }
+        el.textContent = '👍 ' + count;
+    }
+    function replyToComment(el) {
+        var item = el.closest('.comment-item');
+        var author = item ? item.querySelector('.comment-author').textContent : '';
+        var input = document.getElementById('commentInput');
+        if (input) {
+            input.value = '@' + author + ' ';
+            input.focus();
+            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+    function copyCommentText(el) {
+        var item = el.closest('.comment-item');
+        var text = item ? item.querySelector('.comment-text').textContent : '';
+        if (navigator.clipboard && text) {
+            navigator.clipboard.writeText(text);
+            el.textContent = '✅ 已复制';
+            setTimeout(function() { el.textContent = '📋 复制'; }, 1500);
+        }
     }
 
     // 快捷键
@@ -12941,7 +13874,7 @@
             '注册用户':'Registered Users','今日活跃':'Today Active','总内容数':'Total Content Count','待处理举报':'Pending Reports','更新数据':'Refresh Data',
             '流量趋势':'Traffic Trends','查看平台访问量、播放量、互动量等趋势':'View trends in visits, plays, and interactions','今日':'Today','近7天':'Last 7 Days','近30天':'Last 30 Days','近90天':'Last 90 Days','查看趋势':'View Trends',
             '热门内容 TOP10':'Top 10 Trending Content','实时排行榜：播放/阅读/互动量排名':'Live ranking: plays / reads / interactions','查看排行':'View Ranking','系统健康':'System Health','CPU 使用率':'CPU Usage','内存使用率':'Memory Usage','存储使用率':'Storage Usage',
-            'AI生成原创科幻电影《星际觉醒》':'AI Original Sci-Fi Film "Stellar Awakening"','火眼金睛原创工作室':'Flame-Eyes Original Studio',
+            'AI生成原创科幻电影《星际觉醒》':'AI Original Sci-Fi Film "Stellar Awakening"','火眼金睛原创工作室':'FlameEyes Original Studio',
             '原创玄幻短剧《灵境行者》第1集':'Original Fantasy Short Drama "Spirit Walker" Episode 1','赛博朋克短片《2099》':'Cyberpunk Short "2099"',
             '恐怖短剧《回魂夜》第3集':'Horror Short Drama "Night of Returning Souls" Episode 3','武侠电影《剑归》完整版':'Wuxia Film "Return of the Sword" Full Version',
             '爱情短剧《月光下的承诺》':'Romance Short Drama "Promise Under Moonlight"','未来影像实验室':'Future Vision Lab','暗夜工作室':'Night Studio','侠客行影视':'Wanderer Films','甜心剧场':'Sweetheart Theater',
@@ -13456,6 +14389,9 @@
         if (profileBio && savedProfile && savedProfile.bio) {
             profileBio.textContent = savedProfile.bio;
         }
+        // 游戏发布者显示当前登录用户
+        var pubEl = document.getElementById('gamePublisherName');
+        if (pubEl) pubEl.textContent = currentUser ? currentUser.username : '神话工作室';
     }
 
     function showLoginModal() {
@@ -13501,7 +14437,7 @@
     function renderLoginQrMatrix(seed) {
         var matrix = document.getElementById('loginQrMatrix');
         if (!matrix) return;
-        var source = seed || 'flame-eyes';
+        var source = seed || 'FlameEyes';
         var html = '';
         for (var i = 0; i < 225; i++) {
             var code = source.charCodeAt(i % source.length) + i * 7;
@@ -13545,6 +14481,7 @@
         if (found) {
             currentUser = found;
             localStorage.setItem('flameEyesCurrentUser', JSON.stringify(found));
+            ensureGameInMyWorks();
             updateUserAvatarDisplays();
             closeModal('loginModal');
             showPopupNotice('searchNotice', '欢迎回来，' + u, false);
@@ -13567,6 +14504,7 @@
         loginQrTargetUser = found.username;
         currentUser = found;
         localStorage.setItem('flameEyesCurrentUser', JSON.stringify(found));
+        ensureGameInMyWorks();
         updateUserAvatarDisplays();
         updateLoginQrStatus();
         closeModal('loginModal');
@@ -13580,11 +14518,39 @@
         if (p !== c) return alert('两次密码不一致');
         var users = JSON.parse(localStorage.getItem('flameEyesUsers') || '[]');
         if (users.find(function(x) { return x.username === u; })) return alert('账号已存在');
-        users.push({ username: u, password: p });
+        var newUser = { username: u, password: p };
+        users.push(newUser);
         localStorage.setItem('flameEyesUsers', JSON.stringify(users));
-        showPopupNotice('searchNotice', '注册成功，请登录', false);
+        // 注册后自动登录
+        currentUser = newUser;
+        localStorage.setItem('flameEyesCurrentUser', JSON.stringify(newUser));
+        ensureGameInMyWorks();
+        updateUserAvatarDisplays();
         closeModal('registerModal');
-        showModal('loginModal');
+        showPopupNotice('searchNotice', '🎉 注册成功并已自动登录！欢迎 ' + u, false);
+    }
+
+    // ====================================================================
+    //  确保「神话宇宙」在我的作品列表中
+    // ====================================================================
+    function ensureGameInMyWorks() {
+        var works = FE.getWorks();
+        var exists = works.some(function(w) { return w.title === '神话宇宙'; });
+        if (!exists) {
+            FE.addWork({
+                title: '神话宇宙',
+                type: '游戏',
+                desc: 'TCG 卡牌对战 / 神话主题 · 浏览器在线对战 · 2-8人',
+                file: '神话宇宙260312.ttsmod',
+                status: '已发布',
+                views: 38000,
+                likes: 9600,
+                visibilityMode: '全员可见',
+                visibilityTargets: '',
+                voiceAuthorized: false,
+                ipProtected: true
+            });
+        }
     }
 
     // ====================================================================
@@ -13607,6 +14573,56 @@
         if (tabEl) tabEl.classList.add('active');
         var panel = document.getElementById('ctab-' + tab);
         if (panel) panel.classList.add('active');
+    }
+
+    /* ---- 创作分区切换 ---- */
+    var creationZoneInfo = {
+        '视频': { icon: '🎬', label: '视频区创作', desc: '上传原创视频内容，支持 AI 辅助生成标题与封面。' },
+        '电影': { icon: '🎞️', label: '电影区创作', desc: '发布长片电影作品，支持分段付费与会员专享。' },
+        '剧集': { icon: '📺', label: '剧集区创作', desc: '发布连载剧集，支持分集管理与追更提醒。' },
+        '短剧': { icon: '⚡', label: '短剧区创作', desc: '上传竖屏短剧，适合快节奏内容创作。' },
+        '小说': { icon: '📖', label: '小说区创作', desc: '发布小说章节，支持连载排期与章节标题生成。' },
+        '漫画': { icon: '🎨', label: '漫画区创作', desc: '上传漫画作品，支持条漫与页漫格式。' },
+        '游戏': { icon: '🎮', label: '游戏区创作', desc: '发布游戏作品，支持上传可运行的游戏代码包（HTML5 / WebGL）。' },
+        '直播': { icon: '📡', label: '直播区创作', desc: '管理直播预告与回放内容。' },
+        '歌乐': { icon: '🎵', label: '歌乐区创作', desc: '上传原创音乐与歌曲作品。' },
+        '动态': { icon: '📝', label: '动态区创作', desc: '发布图文动态帖，支持免费/付费内容分割线。' }
+    };
+    function switchCreationZone(zone) {
+        document.querySelectorAll('#creationZoneTabs .creation-zone-tab').forEach(function(t) { t.classList.remove('active'); });
+        var tabEl = document.querySelector('#creationZoneTabs .creation-zone-tab[data-zone="' + zone + '"]');
+        if (tabEl) tabEl.classList.add('active');
+        var info = creationZoneInfo[zone] || creationZoneInfo['视频'];
+        var iconEl = document.getElementById('creationZoneIcon');
+        var labelEl = document.getElementById('creationZoneLabel');
+        var descEl = document.getElementById('creationZoneDesc');
+        if (iconEl) iconEl.textContent = info.icon;
+        if (labelEl) labelEl.textContent = info.label;
+        if (descEl) descEl.textContent = info.desc;
+        var wt = document.getElementById('workType');
+        if (wt) wt.value = zone;
+        onWorkTypeChange();
+    }
+    function onWorkTypeChange() {
+        var wt = document.getElementById('workType');
+        var sec = document.getElementById('gameCodeUploadSection');
+        if (wt && sec) sec.style.display = (wt.value === '游戏') ? 'block' : 'none';
+    }
+    function previewWorkStyle() {
+        var titleEl = document.getElementById('workTitle');
+        var descEl = document.getElementById('workDesc');
+        var tf = document.getElementById('workTitleFont').value;
+        var tc = document.getElementById('workTitleColor').value;
+        var df = document.getElementById('workDescFont').value;
+        var dc = document.getElementById('workDescColor').value;
+        if (titleEl) {
+            titleEl.style.fontFamily = (tf === 'default') ? '' : tf;
+            titleEl.style.color = tc;
+        }
+        if (descEl) {
+            descEl.style.fontFamily = (df === 'default') ? '' : df;
+            descEl.style.color = dc;
+        }
     }
     function switchDataTab(tab) {
         document.querySelectorAll('#dataTabs .creator-tab').forEach(function(t) { t.classList.remove('active'); });
@@ -13760,6 +14776,7 @@
             if (w.type === '歌乐' && w.publishMode) rightsParts.push('歌乐模式：' + w.publishMode);
             if (w.voiceAuthorized) rightsParts.push('声线已授权');
             if (w.ipProtected) rightsParts.push('原创 IP 保护');
+            if (w.gameCode && w.gameCode !== '未选择文件') rightsParts.push('代码包：' + w.gameCode);
             html += '<div class="cp-feature-card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">' +
                 '<div style="flex:1;">' +
                 '<div style="font-weight:600;font-size:14px;">' + w.title + '</div>' +
@@ -14280,7 +15297,12 @@
         if (!title) return alert('请输入作品标题');
         var type = document.getElementById('workType').value;
         var desc = document.getElementById('workDesc').value.trim();
+        if (!contentModeration(title) || !contentModeration(desc)) {
+            alert(currentLang === 'en' ? 'Title or description contains prohibited content. Submission blocked.' : '标题或简介包含违规内容，发布已被拦截。');
+            return;
+        }
         var fileName = document.getElementById('workFileName').textContent;
+        var gameCodeName = (type === '游戏' && document.getElementById('gameCodeFileName')) ? document.getElementById('gameCodeFileName').textContent : '';
         var visibilityMode = document.getElementById('workVisibilityMode') ? document.getElementById('workVisibilityMode').value : '全员可见';
         var visibilityTargets = document.getElementById('workVisibilityTargets') ? document.getElementById('workVisibilityTargets').value.trim() : '';
         var voiceAuthorized = !!(document.getElementById('voiceRightsConfirm') && document.getElementById('voiceRightsConfirm').checked);
@@ -14293,6 +15315,7 @@
             type: type,
             desc: desc,
             file: fileName,
+            gameCode: gameCodeName,
             cover: FE.getAIDraft().customCover || '',
             status: '已发布',
             views: 0,
@@ -14311,11 +15334,12 @@
         document.getElementById('workTitle').value = '';
         document.getElementById('workDesc').value = '';
         document.getElementById('workFileName').textContent = '未选择文件';
+        if (document.getElementById('gameCodeFileName')) document.getElementById('gameCodeFileName').textContent = '未选择文件';
         refreshPublishVisibilityUI(true);
         renderWorksList();
         refreshRevenueUI();
         syncCreatorRightsChecklist();
-        alert('作品《' + title + '》已发布。');
+        alert('作品《' + title + '》已发布到' + type + '区。');
     }
     function saveDraft() {
         var title = document.getElementById('workTitle').value.trim() || '未命名草稿';
@@ -15073,16 +16097,16 @@
     }
     function refreshPlatformWatermarkUI() {
         var settings = FE.getSettings();
-        var watermark = settings.platformOfficialWatermark || { enabled: true, text: '火眼金睛 Flame-Eyes' };
+        var watermark = settings.platformOfficialWatermark || { enabled: true, text: '火眼金睛 FlameEyes' };
         var customWatermark = settings.watermark;
 
         var textInput = document.getElementById('officialWatermarkText');
-        if (textInput) textInput.value = watermark.text || '火眼金睛 Flame-Eyes';
+        if (textInput) textInput.value = watermark.text || '火眼金睛 FlameEyes';
 
         var statusEl = document.getElementById('platformWatermarkStatus');
         if (statusEl) {
             statusEl.textContent = watermark.enabled
-                ? '当前：播放器与详情页右上角固定展示「' + (watermark.text || '火眼金睛 Flame-Eyes') + '」，平台可统一关闭。'
+                ? '当前：播放器与详情页右上角固定展示「' + (watermark.text || '火眼金睛 FlameEyes') + '」，平台可统一关闭。'
                 : '当前：平台官方固定水印已关闭，创作者仍可自行叠加自定义水印。';
         }
 
@@ -15096,7 +16120,7 @@
         ['officialPlayerWatermark', 'officialDetailWatermark'].forEach(function(id) {
             var el = document.getElementById(id);
             if (!el) return;
-            el.textContent = watermark.text || '火眼金睛 Flame-Eyes';
+            el.textContent = watermark.text || '火眼金睛 FlameEyes';
             el.style.display = watermark.enabled ? 'inline-flex' : 'none';
         });
     }
@@ -15104,7 +16128,7 @@
         var textInput = document.getElementById('officialWatermarkText');
         var config = {
             enabled: !!enable,
-            text: textInput && textInput.value.trim() ? textInput.value.trim() : '火眼金睛 Flame-Eyes'
+            text: textInput && textInput.value.trim() ? textInput.value.trim() : '火眼金睛 FlameEyes'
         };
         FE.setSetting('platformOfficialWatermark', config);
         refreshPlatformWatermarkUI();
@@ -15474,22 +16498,65 @@
         refreshPlatformWatermarkUI();
         alert('✅ 已删除所选水印');
     }
-    function showViewHistory() {
-        var hist = FE._get('viewHistory');
-        if (hist.length === 0) hist = viewHistory;
-        alert('📺 观看/游玩记录（' + hist.length + '条）：\n' + hist.join('\n'));
+    function showViewHistory() { renderWatchHistoryUI(); }
+    function deleteSingleHistory() { clearOneWatchHistory(); }
+
+    function renderWatchHistoryUI() {
+        var list = JSON.parse(localStorage.getItem('fe_watch_history') || '[]');
+        var container = document.getElementById('watchHistoryList');
+        var emptyEl = document.getElementById('watchHistoryEmpty');
+        if (!container) return;
+        if (list.length === 0) {
+            container.innerHTML = '';
+            container.appendChild(emptyEl || document.createElement('div'));
+            if (emptyEl) emptyEl.style.display = '';
+            return;
+        }
+        if (emptyEl) emptyEl.style.display = 'none';
+        var html = '';
+        for (var i = 0; i < Math.min(list.length, 30); i++) {
+            var h = list[i];
+            var dateStr = h.timestamp ? new Date(h.timestamp).toLocaleString('zh-CN') : '--';
+            html += '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,0.06);margin-bottom:8px;border:1px solid rgba(255,255,255,0.08);">' +
+                '<div style="font-size:22px;opacity:0.5;">▶</div>' +
+                '<div style="flex:1;min-width:0;">' +
+                '<div style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (h.title || '未知') + '</div>' +
+                '<div style="font-size:12px;color:var(--text-secondary);">' + (h.author || '') + ' · ' + dateStr + '</div>' +
+                '</div>' +
+                '<button class="btn btn-ghost btn-sm" style="font-size:11px;white-space:nowrap;" onclick="removeWatchHistoryItem(' + i + ')">删除</button>' +
+                '</div>';
+        }
+        if (list.length > 30) html += '<div style="text-align:center;color:var(--text-secondary);font-size:13px;padding:8px;">还有 ' + (list.length - 30) + ' 条更早记录</div>';
+        container.innerHTML = html;
     }
-    function deleteSingleHistory() {
-        var hist = FE._get('viewHistory');
-        if (hist.length === 0) hist = viewHistory.slice();
-        if (hist.length > 0) {
-            var removed = hist.pop();
-            FE._set('viewHistory', hist);
-            alert('已删除记录：' + removed);
+
+    function removeWatchHistoryItem(idx) {
+        var list = JSON.parse(localStorage.getItem('fe_watch_history') || '[]');
+        if (idx >= 0 && idx < list.length) {
+            list.splice(idx, 1);
+            localStorage.setItem('fe_watch_history', JSON.stringify(list));
+        }
+        renderWatchHistoryUI();
+    }
+
+    function clearOneWatchHistory() {
+        var list = JSON.parse(localStorage.getItem('fe_watch_history') || '[]');
+        if (list.length > 0) {
+            var removed = list.shift();
+            localStorage.setItem('fe_watch_history', JSON.stringify(list));
+            alert(currentLang === 'en' ? 'Deleted: ' + removed.title : '已删除：' + removed.title);
+            renderWatchHistoryUI();
         } else {
-            alert('没有可删除的记录');
+            alert(currentLang === 'en' ? 'No history to delete' : '没有可删除的记录');
         }
     }
+
+    function clearAllWatchHistory() {
+        localStorage.removeItem('fe_watch_history');
+        renderWatchHistoryUI();
+        alert(currentLang === 'en' ? 'All watch history cleared' : '已清空全部观看历史');
+    }
+
     function toggleDanmaku(enable) {
         danmakuEnabled = enable;
         FE.setSetting('danmaku', enable);
@@ -15684,8 +16751,9 @@
         list.push({ user: 'user_' + Date.now(), time: new Date().toLocaleString() });
         FE._set('danmakuBlockUsers', list);
     }
-    function likeDanmaku() { alert('👍 已点赞该弹幕'); }
-    function dislikeDanmaku() { alert('👎 已点踩该弹幕'); }
+    var _dmLikes = 0, _dmDislikes = 0;
+    function likeDanmaku() { _dmLikes++; showPopupNotice('searchNotice', '👍 已点赞弹幕（累计 ' + _dmLikes + ' 赞）', false); }
+    function dislikeDanmaku() { _dmDislikes++; showPopupNotice('searchNotice', '👎 已点踩弹幕（累计 ' + _dmDislikes + ' 踩）', false); }
     function showDanmakuHistory() {
         var times = [];
         for (var i = 0; i < 8; i++) {
@@ -16104,6 +17172,7 @@
         } else if (savedUsers.length > 0) {
             currentUser = savedUsers[0];
         }
+        if (currentUser) ensureGameInMyWorks();
 
         updateUserAvatarDisplays();
         primeCategoryCache();
@@ -16353,6 +17422,109 @@
         }
     }
 
+    /* ── 游戏对话功能 ── */
+    function sendGameChat() {
+        var input = document.getElementById('gameChatInput');
+        if (!input) return;
+        var text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        appendGameChatMsg(text, 'is-self');
+        // 模拟其他玩家回复
+        setTimeout(function() {
+            var replies = [
+                '好的，收到！', '这局策略不错！', '我准备出大招了', '小心对面阵营',
+                '我这轮抽到了好牌', '可以配合我打一波', '注意资源分配', '该冲了！',
+                '稳住，后期我们优势', '神祇能力准备好了'
+            ];
+            appendGameChatMsg('玩家' + Math.floor(Math.random()*99+1) + '：' + replies[Math.floor(Math.random()*replies.length)], 'is-other');
+        }, 800 + Math.random()*1200);
+    }
+
+    function appendGameChatMsg(text, cls) {
+        var box = document.getElementById('gameChatBox');
+        if (!box) return;
+        var div = document.createElement('div');
+        div.className = 'game-chat-msg ' + (cls || '');
+        div.textContent = text;
+        box.appendChild(div);
+        box.scrollTop = box.scrollHeight;
+    }
+
+    var gameVoiceRecognition = null;
+    function startGameVoiceInput() {
+        var btn = document.getElementById('gameChatVoiceBtn');
+        var input = document.getElementById('gameChatInput');
+        if (!btn || !input) return;
+
+        // 如果正在录音，停止
+        if (btn.classList.contains('is-recording')) {
+            btn.classList.remove('is-recording');
+            btn.innerHTML = '🎤 录音转文字';
+            if (gameVoiceRecognition) { gameVoiceRecognition.stop(); gameVoiceRecognition = null; }
+            return;
+        }
+
+        var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert('当前浏览器不支持语音识别，请使用 Chrome 或 Edge 浏览器。');
+            return;
+        }
+
+        gameVoiceRecognition = new SpeechRecognition();
+        gameVoiceRecognition.lang = 'zh-CN';
+        gameVoiceRecognition.interimResults = false;
+        gameVoiceRecognition.maxAlternatives = 1;
+
+        btn.classList.add('is-recording');
+        btn.innerHTML = '⏹ 停止录音';
+
+        gameVoiceRecognition.onresult = function(event) {
+            var transcript = event.results[0][0].transcript;
+            input.value = (input.value ? input.value + ' ' : '') + transcript;
+        };
+        gameVoiceRecognition.onerror = function() {
+            btn.classList.remove('is-recording');
+            btn.innerHTML = '🎤 录音转文字';
+            gameVoiceRecognition = null;
+        };
+        gameVoiceRecognition.onend = function() {
+            btn.classList.remove('is-recording');
+            btn.innerHTML = '🎤 录音转文字';
+            gameVoiceRecognition = null;
+        };
+        gameVoiceRecognition.start();
+    }
+
+    // ====================================================================
+    //  通用录音转文字（适用于任意 input/textarea）
+    // ====================================================================
+    var genericVoiceRecognition = null;
+    function startVoiceInput(targetId) {
+        var el = document.getElementById(targetId);
+        if (!el) return;
+        if (genericVoiceRecognition) { genericVoiceRecognition.stop(); genericVoiceRecognition = null; return; }
+        var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert(currentLang === 'en' ? 'Your browser does not support speech recognition. Please use Chrome or Edge.' : '当前浏览器不支持语音识别，请使用 Chrome 或 Edge 浏览器。');
+            return;
+        }
+        genericVoiceRecognition = new SpeechRecognition();
+        genericVoiceRecognition.lang = currentLang === 'en' ? 'en-US' : 'zh-CN';
+        genericVoiceRecognition.interimResults = false;
+        genericVoiceRecognition.maxAlternatives = 1;
+        showPopupNotice('searchNotice', currentLang === 'en' ? '🎤 Listening... Speak now' : '🎤 正在录音...请说话', false);
+        genericVoiceRecognition.onresult = function(event) {
+            var transcript = event.results[0][0].transcript;
+            if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
+                el.value = (el.value ? el.value + ' ' : '') + transcript;
+            }
+        };
+        genericVoiceRecognition.onerror = function() { genericVoiceRecognition = null; };
+        genericVoiceRecognition.onend = function() { genericVoiceRecognition = null; };
+        genericVoiceRecognition.start();
+    }
+
     function initCardGame() {
         if (cardGameInited) return;
         cardGameInited = true;
@@ -16586,6 +17758,10 @@
         refreshPlatformWatermarkUI();
         refreshDigitalHumanUI();
         refreshAICapacityEngineUI();
+        refreshPaymentBindingStatus();
+        renderWatchHistoryUI();
+        refreshGamePurchaseUI();
+        refreshWalletUI();
         refreshPlayerAssistUI();
         snapPlayerToLockedRange();
         previewPromoSettlement();
@@ -16620,8 +17796,8 @@
         var watermarkText = document.getElementById('officialWatermarkText');
         if (watermarkText) {
             watermarkText.addEventListener('input', function() {
-                var current = FE.getSettings().platformOfficialWatermark || { enabled: true, text: '火眼金睛 Flame-Eyes' };
-                current.text = this.value.trim() || '火眼金睛 Flame-Eyes';
+                var current = FE.getSettings().platformOfficialWatermark || { enabled: true, text: '火眼金睛 FlameEyes' };
+                current.text = this.value.trim() || '火眼金睛 FlameEyes';
                 FE.setSetting('platformOfficialWatermark', current);
                 refreshPlatformWatermarkUI();
             });
